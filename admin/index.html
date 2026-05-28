@@ -995,7 +995,7 @@
     </button>
     <p class="login-help">
       Obtenir un token : <a href="https://www.sanity.io/manage/personal/project/iv3lqevt/api#tokens" target="_blank">manage.sanity.io → API → Tokens</a><br>
-      (type : <strong>Editor</strong> ou <strong>Administrator</strong>)
+      (permissions : <strong>Editor</strong> ou <strong>Administrator</strong>)
     </p>
   </div>
 </div>
@@ -1116,8 +1116,8 @@ let ratingValue   = 5
 // ─────────────────────────────────────────────────────────
 function handleLogin() {
   const input = document.getElementById('token-input').value.trim()
-  if (!input.startsWith('sk-')) {
-    showLoginError('Le token doit commencer par "sk-". Vérifiez sur manage.sanity.io.')
+  if (!input.startsWith('sk')) {
+    showLoginError('Token invalide. Vérifiez sur manage.sanity.io → API → Tokens.')
     return
   }
   TOKEN = input
