@@ -20,6 +20,10 @@ studio/dist/
 .env.local
 .env.*.local
 
+# Vidéos lourdes (> 100 Mo — à compresser avant mise en ligne)
+images/hero/*.mp4
+images/hero/*.webm
+
 # Logs
 *.log
 npm-debug.log*
