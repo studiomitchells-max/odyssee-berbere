@@ -1,0 +1,14 @@
+# Redirections Cloudflare Pages
+
+# Accueil sans extension
+/accueil    /index.html    301
+
+# Alias commodes
+/boutique   /contact.html  301
+/shop       /contact.html  301
+/galerie    /galerie.html  301
+/univers    /univers.html  301
+/histoire   /histoire.html 301
+
+# Fallback 404 → page d'accueil (optionnel, décommentez si souhaité)
+# /*    /index.html    200

@@ -1,0 +1,157 @@
+/**
+ * data.js — Données produits & catégories
+ * Modifiez ce fichier pour mettre à jour les produits affichés
+ */
+
+var UNIVERS = [
+  {
+    id: 'tapis',
+    label: 'Tapis Berbères',
+    desc: "Azilal, Beni Ourain, Kilim — la mémoire tissée de l'Atlas.",
+    image: 'images/categories/tapis.jpg',
+    href: 'univers.html#tapis',
+  },
+  {
+    id: 'poteries',
+    label: 'Jarres & Poteries',
+    desc: 'Argile et terre cuite, façonnées à Fès et Safi.',
+    image: 'images/categories/poteries.jpg',
+    href: 'univers.html#poteries',
+  },
+  {
+    id: 'luminaires',
+    label: 'Luminaires',
+    desc: 'Lanternes en laiton, suspensions en corde, photophores.',
+    image: 'images/categories/luminaires.jpg',
+    href: 'univers.html#luminaires',
+  },
+  {
+    id: 'table',
+    label: 'Art de la Table',
+    desc: 'Tagines décoratifs, plateaux en cuivre, céramiques peintes.',
+    image: 'images/categories/art-de-la-table.jpg',
+    href: 'univers.html#table',
+  },
+  {
+    id: 'deco',
+    label: 'Décoration',
+    desc: 'Miroirs, coussins brodés, paniers en osier et pièces uniques.',
+    image: 'images/categories/decoration.jpg',
+    href: 'univers.html#deco',
+  },
+];
+
+var PRODUITS_VEDETTE = [
+  {
+    id: 1,
+    nom: 'Tapis Berbère Azilal',
+    origine: 'Azilal, Haut Atlas',
+    matiere: 'Laine naturelle · Fait main',
+    categorie: 'tapis',
+    image: 'images/products/tapis-azilal.jpg',
+    href: 'galerie.html',
+  },
+  {
+    id: 2,
+    nom: 'Grande Jarre de Safi',
+    origine: 'Safi, Maroc',
+    matiere: 'Terre cuite émaillée · Fait main',
+    categorie: 'poteries',
+    image: 'images/products/jarre-safi.jpg',
+    href: 'galerie.html',
+  },
+  {
+    id: 3,
+    nom: 'Lanterne Orientale',
+    origine: 'Marrakech, Maroc',
+    matiere: 'Laiton découpé · Verre coloré',
+    categorie: 'luminaire',
+    image: 'images/products/lanterne.jpg',
+    href: 'galerie.html',
+  },
+  {
+    id: 4,
+    nom: 'Plateau en Cuivre Repoussé',
+    origine: 'Fès, Maroc',
+    matiere: 'Cuivre martelé · Fait main',
+    categorie: 'table',
+    image: 'images/products/plateau-cuivre.jpg',
+    href: 'galerie.html',
+  },
+];
+
+var TOUS_PRODUITS = [
+  ...PRODUITS_VEDETTE,
+  {
+    id: 5,
+    nom: 'Tapis Beni Ourain',
+    origine: 'Beni Ourain, Moyen Atlas',
+    matiere: 'Laine brute non teintée',
+    categorie: 'tapis',
+    image: 'images/products/tapis-beni-ourain.jpg',
+    href: 'galerie.html',
+  },
+  {
+    id: 6,
+    nom: 'Coussin Berbère Brodé',
+    origine: 'Fès, Maroc',
+    matiere: 'Coton & broderies soie',
+    categorie: 'deco',
+    image: 'images/products/coussin-brode.jpg',
+    href: 'galerie.html',
+  },
+  {
+    id: 7,
+    nom: 'Bougeoir en Argile',
+    origine: 'Taroudant, Maroc',
+    matiere: 'Argile cuite · Gravures berbères',
+    categorie: 'deco',
+    image: 'images/products/bougeoir-argile.jpg',
+    href: 'galerie.html',
+  },
+  {
+    id: 8,
+    nom: 'Bol à Épices Peint',
+    origine: 'Chefchaouen, Maroc',
+    matiere: 'Céramique peinte à la main',
+    categorie: 'table',
+    image: 'images/products/bol-epices.jpg',
+    href: 'galerie.html',
+  },
+  {
+    id: 9,
+    nom: 'Kilim Géométrique',
+    origine: 'Ouarzazate, Maroc',
+    matiere: 'Laine tissée · Motifs tribaux',
+    categorie: 'tapis',
+    image: 'images/products/kilim.jpg',
+    href: 'galerie.html',
+  },
+  {
+    id: 10,
+    nom: 'Vase Amphore Ocre',
+    origine: 'Meknès, Maroc',
+    matiere: 'Terre cuite patinée',
+    categorie: 'poteries',
+    image: 'images/products/vase-amphore.jpg',
+    href: 'galerie.html',
+  },
+  {
+    id: 11,
+    nom: 'Suspension Corde & Laiton',
+    origine: 'Essaouira, Maroc',
+    matiere: 'Corde naturelle · Laiton',
+    categorie: 'luminaire',
+    image: 'images/products/suspension.jpg',
+    href: 'galerie.html',
+  },
+  {
+    id: 12,
+    nom: 'Panier Doum Tressé',
+    origine: 'Merzouga, Maroc',
+    matiere: 'Feuilles de doum séchées',
+    categorie: 'deco',
+    image: 'images/products/panier-doum.jpg',
+    href: 'galerie.html',
+  },
+];

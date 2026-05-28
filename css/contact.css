@@ -1,0 +1,335 @@
+/* ============================================================
+   CONTACT PAGE — styles spécifiques
+   ============================================================ */
+
+/* Hero contact */
+.contact-hero {
+  position: relative;
+  min-height: 55vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.contact-hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.contact-hero-bg .hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contact-hero-content {
+  position: relative;
+  z-index: 1;
+  padding-top: calc(var(--nav-h) + 3rem);
+  padding-bottom: 5rem;
+}
+
+.contact-hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 400;
+  color: var(--c-white);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.contact-hero-title em {
+  font-style: italic;
+  color: rgba(255, 218, 185, 0.9);
+}
+
+.contact-hero-sub {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.68);
+  line-height: 1.7;
+}
+
+/* Grille principale */
+.contact-main {
+  padding: clamp(4rem, 7vw, 6rem) 0;
+  background: var(--c-bg);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: start;
+}
+
+/* Infos boutique */
+.info-title {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--c-text);
+  margin-bottom: 2rem;
+}
+
+.info-item {
+  display: flex;
+  gap: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.info-icon {
+  flex-shrink: 0;
+  width: 20px;
+  color: var(--c-terracotta);
+  margin-top: 2px;
+}
+
+.info-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+  margin-bottom: 0.4rem;
+}
+
+.info-value {
+  font-size: 0.95rem;
+  color: var(--c-text);
+  line-height: 1.7;
+}
+
+.info-link {
+  color: var(--c-text);
+  transition: color var(--t2) var(--ease);
+}
+
+.info-link:hover { color: var(--c-terracotta); }
+
+/* Horaires */
+.horaires {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.horaire-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  gap: 2rem;
+}
+
+.horaire-closed {
+  color: var(--c-muted);
+}
+
+/* Boutons carte */
+.map-btns {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.map-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 0.45rem 0.9rem;
+  border: 1.5px solid var(--c-sand);
+  border-radius: 100px;
+  color: var(--c-muted);
+  transition: all var(--t2) var(--ease);
+}
+
+.map-btn:hover {
+  border-color: var(--c-terracotta);
+  color: var(--c-terracotta);
+}
+
+/* Réseaux sociaux */
+.info-social {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--c-sand);
+}
+
+.social-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.social-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.55rem 1.1rem;
+  border: 1.5px solid var(--c-sand);
+  border-radius: 100px;
+  color: var(--c-muted);
+  transition: all var(--t2) var(--ease);
+}
+
+.social-pill:hover {
+  border-color: var(--c-terracotta);
+  color: var(--c-terracotta);
+  background: rgba(184, 104, 72, 0.05);
+}
+
+/* Formulaire */
+.form-title {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--c-text);
+  margin-bottom: 0.75rem;
+}
+
+.form-desc {
+  font-size: 0.9rem;
+  color: var(--c-muted);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+  margin-bottom: 0.5rem;
+}
+
+.form-input {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--c-text);
+  background: var(--c-cream);
+  border: 1.5px solid var(--c-sand);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  outline: none;
+  transition: border-color var(--t2) var(--ease), box-shadow var(--t2) var(--ease);
+  -webkit-appearance: none;
+}
+
+.form-input::placeholder { color: var(--c-muted); opacity: 0.6; }
+
+.form-input:focus {
+  border-color: var(--c-terracotta);
+  box-shadow: 0 0 0 3px rgba(184, 104, 72, 0.12);
+}
+
+.form-select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238A7469' stroke-width='1.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  background-size: 16px;
+  padding-right: 2.5rem;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-submit {
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.form-success {
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+  background: rgba(74, 106, 64, 0.1);
+  border: 1px solid rgba(74, 106, 64, 0.3);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  color: #3D5A35;
+}
+
+/* Carte */
+.contact-map {
+  background: var(--c-surface);
+  border-top: 1px solid var(--c-sand);
+}
+
+.map-placeholder {
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-placeholder-inner {
+  text-align: center;
+  color: var(--c-muted);
+}
+
+.map-placeholder-inner svg {
+  margin-inline: auto;
+  margin-bottom: 1rem;
+  opacity: 0.3;
+}
+
+.map-placeholder-inner p {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--c-text);
+  margin-bottom: 0.4rem;
+}
+
+.map-placeholder-inner span {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--c-muted);
+  margin-bottom: 1.5rem;
+}
+
+/* Quand iframe Google Maps est activé */
+.contact-map iframe {
+  display: block;
+  width: 100%;
+  height: 420px;
+  border: 0;
+}
+
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}

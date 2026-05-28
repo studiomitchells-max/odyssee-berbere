@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Boutique & Contact — Odyssée Berbère. Adresse, horaires, formulaire de contact.">
+  <title>Boutique & Contact — Odyssée Berbère</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+
+  <header class="site-header" id="siteHeader">
+    <nav class="nav-inner container">
+      <a href="index.html" class="logo" aria-label="Odyssée Berbère — Accueil">
+        <span class="logo-name">Odyssée Berbère</span>
+        <span class="logo-tag">Artisanat & Décoration</span>
+      </a>
+      <ul class="nav-links" id="navLinks" role="list">
+        <li><a href="univers.html" class="nav-link">Nos Univers</a></li>
+        <li><a href="histoire.html" class="nav-link">Notre Histoire</a></li>
+        <li><a href="galerie.html" class="nav-link">Galerie</a></li>
+        <li><a href="contact.html" class="nav-link is-active">Boutique</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="contact.html" class="btn-visit">Nous rendre visite</a>
+        <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO CONTACT -->
+    <section class="contact-hero">
+      <div class="contact-hero-bg ucard-bg--deco">
+        <img src="images/boutique/boutique.jpg" alt="" class="hero-img" aria-hidden="true">
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="container contact-hero-content">
+        <div data-animate>
+          <span class="eyebrow eyebrow--light">Venir nous voir</span>
+          <h1 class="contact-hero-title">La boutique<br><em>vous attend</em></h1>
+          <p class="contact-hero-sub">Venez toucher, choisir, vous laisser raconter une histoire.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- INFOS PRATIQUES + FORMULAIRE -->
+    <section class="contact-main">
+      <div class="container">
+        <div class="contact-grid">
+
+          <!-- INFOS -->
+          <div class="contact-infos" data-animate>
+
+            <div class="info-bloc">
+              <h2 class="info-title">La boutique</h2>
+
+              <div class="info-item">
+                <div class="info-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <p class="info-label">Adresse</p>
+                  <address class="info-value">
+                    12 Rue des Artisans<br>
+                    75011 Paris, France
+                  </address>
+                  <div class="map-btns">
+                    <a href="https://maps.google.com/?q=12+Rue+des+Artisans+Paris" class="map-btn" target="_blank" rel="noopener noreferrer">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                      Google Maps
+                    </a>
+                    <a href="maps://maps.apple.com/?q=12+Rue+des+Artisans+Paris" class="map-btn" target="_blank" rel="noopener noreferrer">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                      Apple Plans
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div>
+                  <p class="info-label">Horaires d'ouverture</p>
+                  <div class="info-value horaires">
+                    <div class="horaire-row">
+                      <span>Mardi – Samedi</span>
+                      <span>10h30 – 19h30</span>
+                    </div>
+                    <div class="horaire-row">
+                      <span>Dimanche</span>
+                      <span>11h00 – 18h00</span>
+                    </div>
+                    <div class="horaire-row horaire-closed">
+                      <span>Lundi</span>
+                      <span>Fermé</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.7A2 2 0 012.18 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.44-.44a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+                </div>
+                <div>
+                  <p class="info-label">Téléphone</p>
+                  <a href="tel:+33600000000" class="info-value info-link">+33 6 00 00 00 00</a>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="20" height="20"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <div>
+                  <p class="info-label">Email</p>
+                  <a href="mailto:contact@odyssee-berbere.com" class="info-value info-link">contact@odyssee-berbere.com</a>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Réseaux sociaux -->
+            <div class="info-social">
+              <p class="info-label">Suivre la boutique</p>
+              <div class="social-row">
+                <a href="#" class="social-pill" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  Instagram
+                </a>
+                <a href="#" class="social-pill" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                  Facebook
+                </a>
+              </div>
+            </div>
+
+          </div><!-- .contact-infos -->
+
+
+          <!-- FORMULAIRE -->
+          <div class="contact-form-wrap" data-animate data-delay="150">
+            <h2 class="form-title">Nous écrire</h2>
+            <p class="form-desc">Une question sur une pièce, une demande spéciale, ou simplement l'envie de nous dire bonjour — écrivez-nous.</p>
+
+            <form class="contact-form" id="contactForm" novalidate>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="prenom" class="form-label">Prénom</label>
+                  <input type="text" id="prenom" name="prenom" class="form-input" placeholder="Votre prénom" autocomplete="given-name" required>
+                </div>
+                <div class="form-group">
+                  <label for="nom" class="form-label">Nom</label>
+                  <input type="text" id="nom" name="nom" class="form-input" placeholder="Votre nom" autocomplete="family-name" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="votre@email.com" autocomplete="email" required>
+              </div>
+
+              <div class="form-group">
+                <label for="sujet" class="form-label">Sujet</label>
+                <select id="sujet" name="sujet" class="form-input form-select">
+                  <option value="">Choisir un sujet...</option>
+                  <option value="info-piece">Renseignement sur une pièce</option>
+                  <option value="reservation">Réservation en boutique</option>
+                  <option value="pro">Demande professionnelle</option>
+                  <option value="autre">Autre</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="message" class="form-label">Message</label>
+                <textarea id="message" name="message" class="form-input form-textarea" placeholder="Votre message..." rows="5" required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn--primary form-submit">
+                Envoyer le message
+              </button>
+
+              <div class="form-success" id="formSuccess" hidden>
+                <p>✓ Message envoyé avec succès. Nous vous répondrons dans les plus brefs délais.</p>
+              </div>
+
+            </form>
+          </div>
+
+        </div><!-- .contact-grid -->
+      </div>
+    </section>
+
+
+    <!-- CARTE (intégrée via iframe) -->
+    <section class="contact-map" data-animate>
+      <!--
+        CARTE : Remplacez l'URL ci-dessous par votre lien Google Maps embed
+        Pour obtenir ce lien : Google Maps → partager → intégrer une carte → copier l'URL src
+      -->
+      <div class="map-placeholder">
+        <div class="map-placeholder-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="40" height="40"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <p>Carte Google Maps</p>
+          <span>Intégrez votre carte ici via un iframe Google Maps</span>
+          <a href="https://maps.google.com/?q=12+Rue+des+Artisans+Paris" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Ouvrir dans Google Maps</a>
+        </div>
+        <!--
+          Décommentez et personnalisez le bloc suivant pour intégrer votre carte :
+
+          <iframe
+            src="https://www.google.com/maps/embed?pb=VOTRE_ID_ICI"
+            width="100%"
+            height="480"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Localisation Odyssée Berbère"
+          ></iframe>
+        -->
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">Odyssée Berbère</a>
+          <p class="footer-tag">Artisanat marocain &<br>décoration contemporaine.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Navigation</h4>
+          <ul>
+            <li><a href="univers.html">Nos Univers</a></li>
+            <li><a href="histoire.html">Notre Histoire</a></li>
+            <li><a href="galerie.html">Galerie</a></li>
+            <li><a href="contact.html">Boutique & Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Collections</h4>
+          <ul>
+            <li><a href="univers.html#tapis">Tapis Berbères</a></li>
+            <li><a href="univers.html#poteries">Jarres & Poteries</a></li>
+            <li><a href="univers.html#luminaires">Luminaires</a></li>
+            <li><a href="univers.html#table">Art de la Table</a></li>
+            <li><a href="univers.html#deco">Décoration</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Boutique</h4>
+          <address>
+            <p>12 Rue des Artisans<br>75011 Paris</p>
+            <p><a href="tel:+33600000000">+33 6 00 00 00 00</a></p>
+            <p>Mar–Sam&nbsp;: 10h30–19h30<br>Dim&nbsp;: 11h–18h</p>
+          </address>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Odyssée Berbère. Tous droits réservés.</p>
+        <p class="footer-credit">Artisanat fait main, sélectionné avec amour.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/sanity.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/contact.js"></script>
+</body>
+</html>

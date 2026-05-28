@@ -1,0 +1,208 @@
+/* ============================================================
+   HISTOIRE PAGE — styles spécifiques
+   ============================================================ */
+
+/* Hero */
+.histoire-hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.histoire-hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.histoire-hero-bg .hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.histoire-hero-content {
+  position: relative;
+  z-index: 1;
+  padding-top: calc(var(--nav-h) + 4rem);
+  padding-bottom: 6rem;
+}
+
+.histoire-hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 6vw, 4.8rem);
+  font-weight: 300;
+  color: var(--c-white);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.histoire-hero-title em {
+  font-style: italic;
+  color: rgba(255, 218, 185, 0.9);
+}
+
+/* Intro */
+.histoire-intro {
+  padding: clamp(3.5rem, 6vw, 5rem) 0;
+  background: var(--c-bg);
+}
+
+.histoire-lead {
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--c-text);
+  max-width: 720px;
+}
+
+/* Chapitres */
+.histoire-chapitre {
+  padding: clamp(4rem, 7vw, 6rem) 0;
+  background: var(--c-bg);
+}
+
+.histoire-chapitre--alt {
+  background: var(--c-cream);
+}
+
+.histoire-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: center;
+}
+
+.histoire-split--reverse {
+  direction: rtl;
+}
+
+.histoire-split--reverse > * {
+  direction: ltr;
+}
+
+.histoire-num {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: var(--c-sand);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.histoire-split-text .section-title {
+  margin-bottom: 1.5rem;
+}
+
+.histoire-split-text p {
+  color: var(--c-muted);
+  line-height: 1.85;
+  font-size: 0.98rem;
+  margin-bottom: 0.85rem;
+}
+
+.histoire-split-text .btn {
+  margin-top: 1.25rem;
+}
+
+.histoire-img-wrap {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  position: relative;
+}
+
+/* Citation */
+.histoire-quote-section {
+  padding: clamp(3.5rem, 6vw, 5rem) 0;
+  background: var(--c-surface);
+  border-top: 1px solid var(--c-sand);
+  border-bottom: 1px solid var(--c-sand);
+}
+
+/* Valeurs */
+.histoire-valeurs {
+  padding: clamp(4rem, 7vw, 6rem) 0;
+  background: var(--c-bg);
+}
+
+.valeurs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.valeur-card {
+  padding: 2.5rem 2rem;
+  background: var(--c-cream);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--c-sand);
+}
+
+.valeur-num {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--c-terracotta);
+  margin-bottom: 1rem;
+}
+
+.valeur-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--c-text);
+  margin-bottom: 0.75rem;
+}
+
+.valeur-card p {
+  font-size: 0.9rem;
+  color: var(--c-muted);
+  line-height: 1.75;
+}
+
+/* CTA final */
+.histoire-cta {
+  padding: clamp(4rem, 7vw, 6rem) 0;
+  background: var(--c-cream);
+  border-top: 1px solid var(--c-sand);
+  text-align: center;
+}
+
+.histoire-cta-inner .section-desc {
+  margin-inline: auto;
+}
+
+.histoire-cta-btns {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .histoire-split,
+  .histoire-split--reverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+
+  .histoire-img-wrap {
+    aspect-ratio: 16 / 9;
+    max-height: 360px;
+  }
+
+  .valeurs-grid {
+    grid-template-columns: 1fr;
+  }
+}

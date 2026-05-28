@@ -1,0 +1,146 @@
+/* ============================================================
+   GALERIE PAGE — styles spécifiques
+   ============================================================ */
+
+/* En-tête page */
+.galerie-header {
+  padding: clamp(7rem, 12vw, 10rem) 0 clamp(2.5rem, 4vw, 3.5rem);
+  background: var(--c-bg);
+}
+
+.galerie-header-inner {
+  max-width: 600px;
+}
+
+/* Barre de filtres (sticky) */
+.galerie-filters-bar {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 50;
+  background: rgba(250, 248, 245, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--c-sand);
+  padding: 0.85rem 0;
+}
+
+.filters-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filters-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+  flex-shrink: 0;
+}
+
+.filters-list {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.filter-btn {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  padding: 0.45rem 1rem;
+  border-radius: 100px;
+  border: 1.5px solid var(--c-sand);
+  color: var(--c-muted);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--t2) var(--ease);
+  white-space: nowrap;
+}
+
+.filter-btn:hover {
+  border-color: var(--c-terracotta);
+  color: var(--c-terracotta);
+}
+
+.filter-btn.is-active {
+  background: var(--c-terracotta);
+  border-color: var(--c-terracotta);
+  color: var(--c-white);
+}
+
+.filters-count {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--c-muted);
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+/* Section galerie */
+.galerie-section {
+  padding: clamp(2.5rem, 4vw, 4rem) 0 clamp(4rem, 7vw, 6rem);
+  min-height: 50vh;
+}
+
+.galerie-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+/* Animation filtrage */
+.galerie-grid .product-card {
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+}
+
+.galerie-grid .product-card.is-hidden {
+  opacity: 0;
+  transform: scale(0.96);
+  pointer-events: none;
+  position: absolute;
+  visibility: hidden;
+}
+
+/* Message vide */
+.galerie-empty {
+  text-align: center;
+  padding: 4rem 0;
+  color: var(--c-muted);
+}
+
+.galerie-empty p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .galerie-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .galerie-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+  }
+
+  .filters-inner {
+    gap: 0.6rem;
+  }
+
+  .filters-label { display: none; }
+}
+
+@media (max-width: 400px) {
+  .galerie-grid {
+    grid-template-columns: 1fr;
+  }
+}

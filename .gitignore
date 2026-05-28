@@ -1,0 +1,25 @@
+# Système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node / Studio Sanity
+studio/node_modules/
+studio/.sanity/
+studio/dist/
+
+# Fichiers sensibles
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nos Univers — Odyssée Berbère. Tapis berbères, jarres & poteries, luminaires, art de la table et décoration intérieure.">
+  <title>Nos Univers — Odyssée Berbère</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/univers.css">
+</head>
+<body>
+
+  <header class="site-header" id="siteHeader">
+    <nav class="nav-inner container">
+      <a href="index.html" class="logo" aria-label="Odyssée Berbère — Accueil">
+        <span class="logo-name">Odyssée Berbère</span>
+        <span class="logo-tag">Artisanat & Décoration</span>
+      </a>
+      <ul class="nav-links" id="navLinks" role="list">
+        <li><a href="univers.html" class="nav-link is-active">Nos Univers</a></li>
+        <li><a href="histoire.html" class="nav-link">Notre Histoire</a></li>
+        <li><a href="galerie.html" class="nav-link">Galerie</a></li>
+        <li><a href="contact.html" class="nav-link">Boutique</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="contact.html" class="btn-visit">Nous rendre visite</a>
+        <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+      <div class="page-hero-bg ucard-bg--tapis"></div>
+      <div class="page-hero-overlay"></div>
+      <div class="container page-hero-content">
+        <div data-animate>
+          <span class="eyebrow eyebrow--light">Explorer</span>
+          <h1 class="page-hero-title">Nos Univers</h1>
+          <p class="page-hero-desc">Cinq collections, un seul fil conducteur : la beauté du geste artisanal marocain.</p>
+        </div>
+      </div>
+      <!-- Ancres de navigation -->
+      <nav class="univers-nav" aria-label="Naviguer entre les univers">
+        <div class="container">
+          <ul class="univers-nav-list">
+            <li><a href="#tapis" class="univers-nav-link">Tapis</a></li>
+            <li><a href="#poteries" class="univers-nav-link">Jarres & Poteries</a></li>
+            <li><a href="#luminaires" class="univers-nav-link">Luminaires</a></li>
+            <li><a href="#table" class="univers-nav-link">Art de la Table</a></li>
+            <li><a href="#deco" class="univers-nav-link">Décoration</a></li>
+          </ul>
+        </div>
+      </nav>
+    </section>
+
+
+    <!-- ══ TAPIS ══ -->
+    <section class="univers-bloc" id="tapis">
+      <div class="container">
+        <div class="univers-intro" data-animate>
+          <div class="univers-intro-text">
+            <span class="eyebrow">Collection 01</span>
+            <h2 class="section-title">Tapis Berbères</h2>
+            <p>Du fond de l'Atlas au cœur de votre salon. Chaque tapis est tissé à la main par des femmes artisanes dont le savoir-faire se transmet de mère en fille depuis des générations.</p>
+            <p>Azilal aux motifs expressionnistes, Beni Ourain à la laine naturelle brute, Kilim aux géométries vives — chaque pièce raconte une histoire, une tribu, un territoire.</p>
+            <a href="galerie.html?categorie=tapis" class="btn btn--dark">Voir tous les tapis</a>
+          </div>
+          <div class="univers-intro-img">
+            <div class="univers-img-wrap ucard-bg--tapis">
+              <!-- PHOTO : images/categories/tapis-detail.jpg -->
+              <img src="images/categories/tapis.jpg" alt="Tapis berbère Azilal" class="univers-photo">
+            </div>
+          </div>
+        </div>
+
+        <div class="univers-products" id="tapis-grid"></div>
+      </div>
+    </section>
+
+
+    <!-- ══ JARRES & POTERIES ══ -->
+    <section class="univers-bloc univers-bloc--alt" id="poteries">
+      <div class="container">
+        <div class="univers-intro univers-intro--reverse" data-animate>
+          <div class="univers-intro-img">
+            <div class="univers-img-wrap ucard-bg--poteries">
+              <!-- PHOTO : images/categories/poteries-detail.jpg -->
+              <img src="images/categories/poteries.jpg" alt="Jarres et poteries marocaines" class="univers-photo">
+            </div>
+          </div>
+          <div class="univers-intro-text">
+            <span class="eyebrow">Collection 02</span>
+            <h2 class="section-title">Jarres & Poteries</h2>
+            <p>Façonnées dans les ateliers de Safi, Fès et Tamegroute, nos poteries portent la mémoire des grands centres céramiques du Maroc. L'argile rouge de Safi, les émaux cobalt de Fès, le vert profond de Tamegroute.</p>
+            <p>Jarres monumentales pour les entrées, bols et plats pour la table, vases pour les compositions florales — la céramique marocaine a ce don de s'adapter à tous les intérieurs.</p>
+            <a href="galerie.html?categorie=poteries" class="btn btn--dark">Voir toutes les poteries</a>
+          </div>
+        </div>
+
+        <div class="univers-products" id="poteries-grid"></div>
+      </div>
+    </section>
+
+
+    <!-- ══ LUMINAIRES ══ -->
+    <section class="univers-bloc" id="luminaires">
+      <div class="container">
+        <div class="univers-intro" data-animate>
+          <div class="univers-intro-text">
+            <span class="eyebrow">Collection 03</span>
+            <h2 class="section-title">Luminaires</h2>
+            <p>La lumière est l'âme de l'espace. Nos luminaires — lanternes en laiton découpé, suspensions en corde naturelle, photophores en verre soufflé — transforment chaque pièce en un jeu d'ombres et de reflets chaleureux.</p>
+            <p>Travaillées à la main par des artisans de Marrakech et d'Essaouira, ces pièces projettent des motifs géométriques berbères sur les murs, créant une atmosphère unique à chaque allumage.</p>
+            <a href="galerie.html?categorie=luminaire" class="btn btn--dark">Voir tous les luminaires</a>
+          </div>
+          <div class="univers-intro-img">
+            <div class="univers-img-wrap ucard-bg--luminaires">
+              <!-- PHOTO : images/categories/luminaires-detail.jpg -->
+              <img src="images/categories/luminaires.jpg" alt="Luminaires artisanaux marocains" class="univers-photo">
+            </div>
+          </div>
+        </div>
+
+        <div class="univers-products" id="luminaires-grid"></div>
+      </div>
+    </section>
+
+
+    <!-- ══ ART DE LA TABLE ══ -->
+    <section class="univers-bloc univers-bloc--alt" id="table">
+      <div class="container">
+        <div class="univers-intro univers-intro--reverse" data-animate>
+          <div class="univers-intro-img">
+            <div class="univers-img-wrap ucard-bg--table">
+              <!-- PHOTO : images/categories/art-de-la-table-detail.jpg -->
+              <img src="images/categories/art-de-la-table.jpg" alt="Art de la table marocain" class="univers-photo">
+            </div>
+          </div>
+          <div class="univers-intro-text">
+            <span class="eyebrow">Collection 04</span>
+            <h2 class="section-title">Art de la Table</h2>
+            <p>La culture du repas au Maroc est un art en soi. Nos pièces pour la table — plateaux en cuivre martelé, théières en argent, tagines décoratifs, bols peints à la main — invitent à ralentir et à savourer le moment.</p>
+            <p>Des objets qui ne sont pas seulement beaux mais vivants, qui s'enrichissent avec l'usage et deviennent des pièces de famille.</p>
+            <a href="galerie.html?categorie=table" class="btn btn--dark">Voir l'art de la table</a>
+          </div>
+        </div>
+
+        <div class="univers-products" id="table-grid"></div>
+      </div>
+    </section>
+
+
+    <!-- ══ DÉCORATION ══ -->
+    <section class="univers-bloc" id="deco">
+      <div class="container">
+        <div class="univers-intro" data-animate>
+          <div class="univers-intro-text">
+            <span class="eyebrow">Collection 05</span>
+            <h2 class="section-title">Décoration</h2>
+            <p>Miroirs encadrés de métal ciselé, coussins brodés à l'or, paniers en osier et feuilles de doum, sculptures en bois de cèdre — nos objets de décoration apportent une présence discrète et chaleureuse à chaque espace.</p>
+            <p>Pièces uniques ou petites séries, chaque objet est choisi pour sa capacité à créer de la profondeur dans un intérieur contemporain sans jamais l'alourdir.</p>
+            <a href="galerie.html?categorie=deco" class="btn btn--dark">Voir la décoration</a>
+          </div>
+          <div class="univers-intro-img">
+            <div class="univers-img-wrap ucard-bg--deco">
+              <!-- PHOTO : images/categories/decoration-detail.jpg -->
+              <img src="images/categories/decoration.jpg" alt="Décoration intérieure marocaine" class="univers-photo">
+            </div>
+          </div>
+        </div>
+
+        <div class="univers-products" id="deco-grid"></div>
+      </div>
+    </section>
+
+
+    <!-- CTA GALERIE -->
+    <section class="univers-cta">
+      <div class="container">
+        <div class="univers-cta-inner" data-animate>
+          <span class="eyebrow">Toute la collection</span>
+          <h2 class="section-title">Envie de tout voir&nbsp;?</h2>
+          <p class="section-desc">Parcourez l'ensemble de notre sélection dans la galerie, filtrée par univers.</p>
+          <a href="galerie.html" class="btn btn--primary">Ouvrir la galerie</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">Odyssée Berbère</a>
+          <p class="footer-tag">Artisanat marocain &<br>décoration contemporaine.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Navigation</h4>
+          <ul>
+            <li><a href="univers.html">Nos Univers</a></li>
+            <li><a href="histoire.html">Notre Histoire</a></li>
+            <li><a href="galerie.html">Galerie</a></li>
+            <li><a href="contact.html">Boutique & Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Collections</h4>
+          <ul>
+            <li><a href="#tapis">Tapis Berbères</a></li>
+            <li><a href="#poteries">Jarres & Poteries</a></li>
+            <li><a href="#luminaires">Luminaires</a></li>
+            <li><a href="#table">Art de la Table</a></li>
+            <li><a href="#deco">Décoration</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Boutique</h4>
+          <address>
+            <p>12 Rue des Artisans<br>75011 Paris</p>
+            <p><a href="tel:+33600000000">+33 6 00 00 00 00</a></p>
+            <p>Mar–Sam&nbsp;: 10h30–19h30<br>Dim&nbsp;: 11h–18h</p>
+          </address>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Odyssée Berbère. Tous droits réservés.</p>
+        <p class="footer-credit">Artisanat fait main, sélectionné avec amour.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/sanity.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/univers.js"></script>
+</body>
+</html>

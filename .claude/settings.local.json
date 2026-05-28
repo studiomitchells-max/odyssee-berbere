@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"/Users/mehdigadalzouaoui/Desktop/SITE WEB OB Claude/.claude\")",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(ls -lh \"/Users/mehdigadalzouaoui/Desktop/OB WEBSITE /FINAL/bandeau.OB.mp4\" 2>&1)",
+      "Bash(cp \"/Users/mehdigadalzouaoui/Desktop/OB WEBSITE /FINAL/bandeau.OB.mp4\" \"/Users/mehdigadalzouaoui/Desktop/SITE WEB OB Claude/images/hero/hero-video.mp4\" && echo \"Copié avec succès\")",
+      "Bash(ffmpeg -version)",
+      "Bash(npm --version)",
+      "Bash(npm install *)",
+      "Bash(npx sanity *)",
+      "Bash(pkill -f \"sanity login\")"
+    ]
+  }
+}
