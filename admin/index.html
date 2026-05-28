@@ -1,0 +1,2227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administration — Odyssée Berbère</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --terracotta: #C06B3C;
+      --terracotta-dark: #9E4E25;
+      --terracotta-light: #E8A87C;
+      --sable: #F5ECD7;
+      --sable-dark: #E8D9B8;
+      --ocre: #D4A853;
+      --vert-atlas: #2D4A3E;
+      --noir: #1A1208;
+      --gris: #6B6259;
+      --gris-clair: #EDE8E0;
+      --blanc: #FFFDF9;
+      --rouge-erreur: #C0392B;
+      --vert-succes: #27AE60;
+      --shadow: 0 4px 24px rgba(26,18,8,0.10);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--gris-clair);
+      color: var(--noir);
+      min-height: 100vh;
+    }
+
+    /* ─── LOGIN ─── */
+    #login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--vert-atlas) 0%, #1a2d26 100%);
+      padding: 20px;
+    }
+
+    .login-card {
+      background: var(--blanc);
+      border-radius: 20px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    .login-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      color: var(--terracotta);
+      margin-bottom: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .login-subtitle {
+      font-size: 12px;
+      color: var(--gris);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 36px;
+    }
+
+    .login-card h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--noir);
+      margin-bottom: 8px;
+    }
+
+    .login-card p {
+      font-size: 13px;
+      color: var(--gris);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .login-card label {
+      display: block;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gris);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .login-card input[type="text"],
+    .login-card input[type="password"] {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--sable-dark);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      color: var(--noir);
+      background: var(--blanc);
+      transition: border-color 0.2s;
+      margin-bottom: 20px;
+      font-family: 'Inter', monospace;
+    }
+
+    .login-card input:focus {
+      outline: none;
+      border-color: var(--terracotta);
+    }
+
+    .btn-primary {
+      background: var(--terracotta);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s, transform 0.1s;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-primary:hover { background: var(--terracotta-dark); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+
+    .login-help {
+      font-size: 11px;
+      color: var(--gris);
+      margin-top: 16px;
+    }
+
+    .login-help a {
+      color: var(--terracotta);
+      text-decoration: none;
+    }
+
+    #login-error {
+      background: #FDECEA;
+      color: var(--rouge-erreur);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    /* ─── APP LAYOUT ─── */
+    #app { display: none; min-height: 100vh; }
+
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 240px;
+      background: var(--vert-atlas);
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+      overflow-y: auto;
+    }
+
+    .sidebar-brand {
+      padding: 28px 24px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .sidebar-brand .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      color: var(--sable);
+      display: block;
+    }
+
+    .sidebar-brand .brand-tag {
+      font-size: 10px;
+      color: var(--terracotta-light);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .sidebar-nav {
+      padding: 16px 12px;
+      flex: 1;
+    }
+
+    .nav-section-title {
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 16px 12px 6px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      color: rgba(255,255,255,0.65);
+      cursor: pointer;
+      transition: all 0.15s;
+      font-size: 14px;
+      font-weight: 400;
+      margin-bottom: 2px;
+      text-decoration: none;
+    }
+
+    .nav-item:hover { background: rgba(255,255,255,0.08); color: white; }
+
+    .nav-item.active {
+      background: var(--terracotta);
+      color: white;
+      font-weight: 500;
+    }
+
+    .nav-item .icon { font-size: 16px; width: 20px; text-align: center; }
+
+    .nav-item .badge {
+      margin-left: auto;
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: 1px 7px;
+      font-size: 11px;
+    }
+
+    .nav-item.active .badge { background: rgba(255,255,255,0.25); }
+
+    .sidebar-footer {
+      padding: 16px 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .logout-btn {
+      color: rgba(255,255,255,0.45);
+      font-size: 12px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      transition: color 0.2s;
+    }
+
+    .logout-btn:hover { color: rgba(255,255,255,0.8); }
+
+    /* ─── MAIN CONTENT ─── */
+    .main {
+      margin-left: 240px;
+      min-height: 100vh;
+      background: var(--gris-clair);
+    }
+
+    .topbar {
+      background: var(--blanc);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--sable-dark);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .topbar h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      color: var(--noir);
+      font-weight: 600;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-add {
+      background: var(--terracotta);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+
+    .btn-add:hover { background: var(--terracotta-dark); }
+
+    .page-content {
+      padding: 32px;
+    }
+
+    /* ─── TOAST ─── */
+    #toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .toast {
+      background: var(--noir);
+      color: white;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: var(--shadow);
+      animation: slideIn 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 220px;
+    }
+
+    .toast.success { background: var(--vert-succes); }
+    .toast.error { background: var(--rouge-erreur); }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── LOADING ─── */
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+      color: var(--gris);
+      font-size: 14px;
+      gap: 10px;
+    }
+
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--sable-dark);
+      border-top-color: var(--terracotta);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── GRID PRODUITS ─── */
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .item-card {
+      background: var(--blanc);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(26,18,8,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .item-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26,18,8,0.10);
+    }
+
+    .item-card-img {
+      aspect-ratio: 4/3;
+      background: var(--sable);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .item-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .item-card-img .no-img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      font-size: 36px;
+      color: var(--sable-dark);
+    }
+
+    .item-card-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--terracotta);
+      color: white;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .item-card-badge.indisponible {
+      background: var(--gris);
+    }
+
+    .item-card-body {
+      padding: 16px;
+    }
+
+    .item-card-title {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 4px;
+      color: var(--noir);
+    }
+
+    .item-card-sub {
+      font-size: 12px;
+      color: var(--gris);
+      margin-bottom: 10px;
+    }
+
+    .item-card-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      color: var(--terracotta);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .item-card-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-edit {
+      flex: 1;
+      padding: 8px;
+      background: var(--sable);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--noir);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-edit:hover { background: var(--sable-dark); }
+
+    .btn-delete {
+      padding: 8px 12px;
+      background: #FDECEA;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      color: var(--rouge-erreur);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-delete:hover { background: #F9C9C5; }
+
+    /* ─── TABLE (galerie, temoignages, pages) ─── */
+    .items-table {
+      background: var(--blanc);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(26,18,8,0.06);
+    }
+
+    .items-table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .items-table thead {
+      background: var(--sable);
+    }
+
+    .items-table th {
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gris);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .items-table td {
+      padding: 14px 16px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--gris-clair);
+      vertical-align: middle;
+    }
+
+    .items-table tr:last-child td { border-bottom: none; }
+
+    .items-table tr:hover td { background: #FDFAF4; }
+
+    .table-img {
+      width: 52px;
+      height: 40px;
+      border-radius: 6px;
+      object-fit: cover;
+      background: var(--sable);
+    }
+
+    .table-img-placeholder {
+      width: 52px;
+      height: 40px;
+      border-radius: 6px;
+      background: var(--sable);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .pill-green { background: #E8F8EE; color: #1B7A3B; }
+    .pill-grey { background: var(--gris-clair); color: var(--gris); }
+    .pill-orange { background: #FEF3E8; color: var(--terracotta); }
+
+    .stars { color: var(--ocre); font-size: 13px; letter-spacing: 1px; }
+
+    /* ─── EMPTY STATE ─── */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gris);
+    }
+
+    .empty-state .empty-icon { font-size: 48px; margin-bottom: 16px; }
+    .empty-state h3 { font-size: 18px; margin-bottom: 8px; color: var(--noir); }
+    .empty-state p { font-size: 13px; }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26,18,8,0.55);
+      z-index: 1000;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 32px 16px;
+      overflow-y: auto;
+      backdrop-filter: blur(3px);
+    }
+
+    .modal {
+      background: var(--blanc);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 640px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      animation: modalIn 0.25s ease;
+      position: relative;
+      margin: auto;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.96) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-header {
+      padding: 24px 28px 20px;
+      border-bottom: 1px solid var(--sable-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--noir);
+    }
+
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--gris-clair);
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gris);
+      transition: background 0.15s;
+    }
+
+    .modal-close:hover { background: var(--sable-dark); }
+
+    .modal-body {
+      padding: 24px 28px;
+    }
+
+    .modal-footer {
+      padding: 16px 28px 24px;
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    /* ─── FORM ─── */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group.full { grid-column: 1 / -1; }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gris);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .form-group label .required { color: var(--terracotta); margin-left: 2px; }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      border: 2px solid var(--sable-dark);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      color: var(--noir);
+      background: var(--blanc);
+      transition: border-color 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--terracotta);
+    }
+
+    textarea.form-control { resize: vertical; min-height: 80px; line-height: 1.5; }
+
+    select.form-control { cursor: pointer; }
+
+    .form-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--noir);
+    }
+
+    .toggle-input { display: none; }
+
+    .toggle-track {
+      width: 40px;
+      height: 22px;
+      background: var(--sable-dark);
+      border-radius: 11px;
+      position: relative;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .toggle-track::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+
+    .toggle-input:checked + .toggle-track { background: var(--terracotta); }
+
+    .toggle-input:checked + .toggle-track::after { transform: translateX(18px); }
+
+    /* ─── IMAGE UPLOAD ─── */
+    .upload-zone {
+      border: 2px dashed var(--sable-dark);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--sable);
+    }
+
+    .upload-zone:hover { border-color: var(--terracotta); background: #FDF4EC; }
+
+    .upload-zone.dragover { border-color: var(--terracotta); background: #FDF4EC; }
+
+    .upload-zone input[type="file"] { display: none; }
+
+    .upload-icon { font-size: 28px; margin-bottom: 8px; }
+
+    .upload-zone p { font-size: 13px; color: var(--gris); }
+
+    .upload-zone strong { color: var(--terracotta); }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .preview-item {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--sable);
+    }
+
+    .preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .preview-item .remove-img {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 20px;
+      height: 20px;
+      background: rgba(0,0,0,0.65);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ─── STAR RATING ─── */
+    .star-rating {
+      display: flex;
+      gap: 4px;
+    }
+
+    .star-rating span {
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--sable-dark);
+      transition: color 0.1s;
+    }
+
+    .star-rating span.active,
+    .star-rating span:hover { color: var(--ocre); }
+
+    /* ─── BUTTONS ─── */
+    .btn-secondary {
+      padding: 10px 20px;
+      background: var(--sable);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--noir);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-secondary:hover { background: var(--sable-dark); }
+
+    .btn-danger {
+      padding: 10px 20px;
+      background: #FDECEA;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--rouge-erreur);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-danger:hover { background: #F9C9C5; }
+
+    .btn-primary-sm {
+      padding: 10px 24px;
+      background: var(--terracotta);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: background 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary-sm:hover { background: var(--terracotta-dark); }
+
+    .btn-primary-sm:disabled {
+      background: var(--sable-dark);
+      color: var(--gris);
+      cursor: not-allowed;
+    }
+
+    /* ─── STATS ─── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: var(--blanc);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      box-shadow: 0 2px 12px rgba(26,18,8,0.06);
+    }
+
+    .stat-card .stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gris);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .stat-card .stat-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      color: var(--terracotta);
+      font-weight: 600;
+    }
+
+    .stat-card .stat-icon {
+      font-size: 20px;
+      float: right;
+      margin-top: -4px;
+    }
+
+    /* ─── FILTER BAR ─── */
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-bar input[type="search"] {
+      padding: 9px 14px;
+      border: 2px solid var(--sable-dark);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      color: var(--noir);
+      background: var(--blanc);
+      width: 240px;
+      transition: border-color 0.2s;
+    }
+
+    .filter-bar input[type="search"]:focus {
+      outline: none;
+      border-color: var(--terracotta);
+    }
+
+    .filter-bar select {
+      padding: 9px 14px;
+      border: 2px solid var(--sable-dark);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      color: var(--noir);
+      background: var(--blanc);
+      cursor: pointer;
+    }
+
+    .filter-bar select:focus { outline: none; border-color: var(--terracotta); }
+
+    /* ─── CONFIRM DIALOG ─── */
+    .confirm-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26,18,8,0.55);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(3px);
+    }
+
+    .confirm-box {
+      background: var(--blanc);
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 380px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      animation: modalIn 0.2s ease;
+    }
+
+    .confirm-box .confirm-icon { font-size: 40px; margin-bottom: 16px; }
+    .confirm-box h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+    .confirm-box p { font-size: 13px; color: var(--gris); margin-bottom: 24px; line-height: 1.6; }
+
+    .confirm-actions { display: flex; gap: 10px; justify-content: center; }
+
+    /* ─── UPLOAD PROGRESS ─── */
+    .upload-progress {
+      margin-top: 8px;
+      height: 4px;
+      background: var(--sable-dark);
+      border-radius: 2px;
+      overflow: hidden;
+      display: none;
+    }
+
+    .upload-progress-bar {
+      height: 100%;
+      background: var(--terracotta);
+      border-radius: 2px;
+      transition: width 0.3s;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); transition: transform 0.3s; }
+      .sidebar.open { transform: translateX(0); }
+      .main { margin-left: 0; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .items-grid { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ LOGIN ═══ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">Odyssée Berbère</div>
+    <div class="login-subtitle">Administration</div>
+    <h2>Connexion</h2>
+    <p>Entrez votre token Sanity pour accéder au back-office. Ce token ne sera demandé qu'une seule fois.</p>
+    <div id="login-error"></div>
+    <label for="token-input">Token Sanity (write)</label>
+    <input type="password" id="token-input" placeholder="sk-..." autocomplete="off" />
+    <button class="btn-primary" onclick="handleLogin()">
+      Accéder au back-office →
+    </button>
+    <p class="login-help">
+      Obtenir un token : <a href="https://www.sanity.io/manage/personal/project/iv3lqevt/api#tokens" target="_blank">manage.sanity.io → API → Tokens</a><br>
+      (type : <strong>Editor</strong> ou <strong>Administrator</strong>)
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ APP ═══ -->
+<div id="app">
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-name">Odyssée Berbère</span>
+      <span class="brand-tag">Back-office</span>
+    </div>
+
+    <div class="sidebar-nav">
+      <div class="nav-section-title">Contenu</div>
+      <a class="nav-item active" onclick="navigate('produits')" href="#">
+        <span class="icon">🪬</span> Produits
+        <span class="badge" id="badge-produits">—</span>
+      </a>
+      <a class="nav-item" onclick="navigate('galerie')" href="#">
+        <span class="icon">🖼️</span> Galerie
+        <span class="badge" id="badge-galerie">—</span>
+      </a>
+      <a class="nav-item" onclick="navigate('temoignages')" href="#">
+        <span class="icon">⭐</span> Témoignages
+        <span class="badge" id="badge-temoignages">—</span>
+      </a>
+      <a class="nav-item" onclick="navigate('pages')" href="#">
+        <span class="icon">📄</span> Pages
+        <span class="badge" id="badge-pages">—</span>
+      </a>
+
+      <div class="nav-section-title">Liens</div>
+      <a class="nav-item" href="https://odyssee-berbere.sanity.studio" target="_blank">
+        <span class="icon">🔧</span> Sanity Studio
+      </a>
+      <a class="nav-item" href="https://github.com/studiomitchells-max/odyssee-berbere" target="_blank">
+        <span class="icon">💻</span> GitHub
+      </a>
+    </div>
+
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="handleLogout()">⟵ Déconnexion</button>
+    </div>
+  </nav>
+
+  <div class="main">
+    <div class="topbar">
+      <h1 id="page-title">Produits</h1>
+      <div class="topbar-actions">
+        <button class="btn-add" id="btn-add-main" onclick="openCreateModal()">
+          + Ajouter
+        </button>
+      </div>
+    </div>
+
+    <div class="page-content" id="page-content">
+      <div class="loading"><div class="spinner"></div> Chargement…</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ MODAL ═══ -->
+<div id="modal-overlay" class="modal-overlay" style="display:none" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <span class="modal-title" id="modal-title">Nouveau produit</span>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer" id="modal-footer"></div>
+  </div>
+</div>
+
+<!-- CONFIRM -->
+<div id="confirm-overlay" class="confirm-overlay" style="display:none">
+  <div class="confirm-box">
+    <div class="confirm-icon">🗑️</div>
+    <h3>Confirmer la suppression</h3>
+    <p id="confirm-text">Cette action est irréversible.</p>
+    <div class="confirm-actions">
+      <button class="btn-secondary" onclick="closeConfirm()">Annuler</button>
+      <button class="btn-danger" id="confirm-ok-btn">Supprimer</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast-container"></div>
+
+<script>
+// ─────────────────────────────────────────────────────────
+//  CONFIGURATION
+// ─────────────────────────────────────────────────────────
+const PROJECT_ID  = 'iv3lqevt'
+const DATASET     = 'production'
+const API_VERSION = 'v2021-06-07'
+
+const API_BASE    = `https://${PROJECT_ID}.api.sanity.io/${API_VERSION}`
+const UPLOAD_URL  = `${API_BASE}/assets/images/${DATASET}`
+const QUERY_URL   = `${API_BASE}/data/query/${DATASET}`
+const MUTATE_URL  = `${API_BASE}/data/mutate/${DATASET}`
+const IMG_BASE    = `https://cdn.sanity.io/images/${PROJECT_ID}/${DATASET}`
+
+// ─────────────────────────────────────────────────────────
+//  STATE
+// ─────────────────────────────────────────────────────────
+let TOKEN         = ''
+let currentSection = 'produits'
+let currentData   = []
+let editingDoc    = null
+let pendingImages = []   // { file, preview } for new uploads
+let existingImages = []  // { _key, asset, alt, caption } already in Sanity
+let confirmCallback = null
+let ratingValue   = 5
+
+// ─────────────────────────────────────────────────────────
+//  AUTH
+// ─────────────────────────────────────────────────────────
+function handleLogin() {
+  const input = document.getElementById('token-input').value.trim()
+  if (!input.startsWith('sk-')) {
+    showLoginError('Le token doit commencer par "sk-". Vérifiez sur manage.sanity.io.')
+    return
+  }
+  TOKEN = input
+  localStorage.setItem('ob_admin_token', TOKEN)
+  bootApp()
+}
+
+function handleLogout() {
+  localStorage.removeItem('ob_admin_token')
+  TOKEN = ''
+  document.getElementById('login-screen').style.display = 'flex'
+  document.getElementById('app').style.display = 'none'
+}
+
+function showLoginError(msg) {
+  const el = document.getElementById('login-error')
+  el.textContent = msg
+  el.style.display = 'block'
+}
+
+// ─────────────────────────────────────────────────────────
+//  SANITY API
+// ─────────────────────────────────────────────────────────
+async function sanityQuery(query) {
+  const url = `${QUERY_URL}?query=${encodeURIComponent(query)}`
+  const r = await fetch(url, {
+    headers: { Authorization: `Bearer ${TOKEN}` }
+  })
+  if (!r.ok) throw new Error(`Erreur API Sanity ${r.status}`)
+  const data = await r.json()
+  return data.result
+}
+
+async function sanityMutate(mutations) {
+  const r = await fetch(MUTATE_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${TOKEN}`
+    },
+    body: JSON.stringify({ mutations })
+  })
+  if (!r.ok) {
+    const err = await r.json()
+    throw new Error(err.message || `Erreur ${r.status}`)
+  }
+  return r.json()
+}
+
+async function uploadImage(file) {
+  const r = await fetch(UPLOAD_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': file.type,
+      Authorization: `Bearer ${TOKEN}`,
+      'X-Sanity-Label': encodeURIComponent(file.name)
+    },
+    body: file
+  })
+  if (!r.ok) throw new Error('Échec upload image')
+  const data = await r.json()
+  return data.document._id
+}
+
+function sanityImgUrl(ref, w = 400) {
+  if (!ref) return null
+  const id = ref.replace('image-', '').replace(/-([a-z]+)$/, '.$1').replace(/-/g, '/')
+  return `${IMG_BASE}/${id}?w=${w}&auto=format`
+}
+
+// ─────────────────────────────────────────────────────────
+//  BOOT
+// ─────────────────────────────────────────────────────────
+async function bootApp() {
+  document.getElementById('login-screen').style.display = 'none'
+  document.getElementById('app').style.display = 'block'
+  await loadSection('produits')
+  await refreshBadges()
+}
+
+async function refreshBadges() {
+  try {
+    const counts = await sanityQuery(`{
+      "produits": count(*[_type == "produit"]),
+      "galerie":  count(*[_type == "galerie"]),
+      "temoignages": count(*[_type == "temoignage"]),
+      "pages": count(*[_type == "pageContenu"])
+    }`)
+    document.getElementById('badge-produits').textContent = counts.produits ?? 0
+    document.getElementById('badge-galerie').textContent  = counts.galerie  ?? 0
+    document.getElementById('badge-temoignages').textContent = counts.temoignages ?? 0
+    document.getElementById('badge-pages').textContent    = counts.pages    ?? 0
+  } catch {}
+}
+
+// ─────────────────────────────────────────────────────────
+//  NAVIGATION
+// ─────────────────────────────────────────────────────────
+function navigate(section) {
+  event && event.preventDefault()
+  currentSection = section
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'))
+  event && event.currentTarget && event.currentTarget.classList.add('active')
+  loadSection(section)
+}
+
+async function loadSection(section) {
+  currentSection = section
+  const titles = {
+    produits: 'Produits',
+    galerie: 'Galerie',
+    temoignages: 'Témoignages',
+    pages: 'Pages'
+  }
+  document.getElementById('page-title').textContent = titles[section]
+  document.getElementById('btn-add-main').textContent = `+ Ajouter`
+
+  // Highlight nav
+  document.querySelectorAll('.nav-item').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('onclick') === `navigate('${section}')`)
+  })
+
+  const content = document.getElementById('page-content')
+  content.innerHTML = '<div class="loading"><div class="spinner"></div> Chargement…</div>'
+
+  try {
+    if (section === 'produits') {
+      currentData = await sanityQuery(`*[_type == "produit"] | order(ordre asc, _createdAt desc) {
+        _id, nom, categorie, prix, prixOriginale, disponible, enVedette,
+        descriptionCourte, origine, artisan, ordre,
+        "image": imagesPrincipales[0].asset._ref
+      }`)
+      renderProduits(content)
+    } else if (section === 'galerie') {
+      currentData = await sanityQuery(`*[_type == "galerie"] | order(ordre asc, _createdAt desc) {
+        _id, titre, categorie, description, ordre, visible,
+        "imageRef": image.asset._ref
+      }`)
+      renderGalerie(content)
+    } else if (section === 'temoignages') {
+      currentData = await sanityQuery(`*[_type == "temoignage"] | order(_createdAt desc) {
+        _id, auteur, ville, texte, note, produitAchete, dateAchat, visible, enVedette,
+        "photoRef": photo.asset._ref
+      }`)
+      renderTemoignages(content)
+    } else if (section === 'pages') {
+      currentData = await sanityQuery(`*[_type == "pageContenu"] | order(page asc) {
+        _id, page, titre, sousTitre, actif, boutonTexte,
+        "imageRef": imageHero.asset._ref
+      }`)
+      renderPages(content)
+    }
+  } catch (err) {
+    content.innerHTML = `<div class="empty-state">
+      <div class="empty-icon">⚠️</div>
+      <h3>Erreur de connexion</h3>
+      <p>${err.message}<br>Vérifiez votre token Sanity.</p>
+    </div>`
+  }
+}
+
+// ─────────────────────────────────────────────────────────
+//  PRODUITS
+// ─────────────────────────────────────────────────────────
+function renderProduits(container) {
+  const cats = {
+    tapis: 'Tapis & Textiles', ceramique: 'Céramique', bijoux: 'Bijoux',
+    maroquinerie: 'Maroquinerie', bois: 'Bois', metal: 'Fer & Cuivre', autres: 'Autres'
+  }
+
+  let html = `
+    <div class="filter-bar">
+      <input type="search" placeholder="🔍 Rechercher un produit…" oninput="filterProduits(this.value)" />
+      <select onchange="filterProduitsCategorie(this.value)">
+        <option value="">Toutes catégories</option>
+        ${Object.entries(cats).map(([v,l]) => `<option value="${v}">${l}</option>`).join('')}
+      </select>
+    </div>
+    <div class="items-grid" id="produits-grid">
+  `
+
+  if (!currentData.length) {
+    html += `<div class="empty-state" style="grid-column:1/-1">
+      <div class="empty-icon">🪬</div>
+      <h3>Aucun produit</h3>
+      <p>Cliquez sur "+ Ajouter" pour créer votre premier produit.</p>
+    </div>`
+  } else {
+    currentData.forEach(p => {
+      const imgUrl = p.image ? sanityImgUrl(p.image, 400) : null
+      const prix = p.prix != null ? `${p.prix} €` : 'Prix non défini'
+      html += `
+        <div class="item-card" data-id="${p._id}" data-nom="${escHtml(p.nom)}" data-cat="${p.categorie||''}">
+          <div class="item-card-img">
+            ${imgUrl ? `<img src="${imgUrl}" alt="${escHtml(p.nom)}" loading="lazy" />` : '<div class="no-img">🪬</div>'}
+            <span class="item-card-badge ${p.disponible===false ? 'indisponible' : ''}">${p.disponible===false ? 'Indisponible' : (p.enVedette ? '⭐ Vedette' : cats[p.categorie] || '')}</span>
+          </div>
+          <div class="item-card-body">
+            <div class="item-card-title">${escHtml(p.nom)}</div>
+            <div class="item-card-sub">${p.origine || cats[p.categorie] || ''}</div>
+            <div class="item-card-price">${prix}</div>
+            <div class="item-card-actions">
+              <button class="btn-edit" onclick="editProduit('${p._id}')">✏️ Modifier</button>
+              <button class="btn-delete" onclick="deleteProduit('${p._id}', '${escHtml(p.nom)}')">🗑️</button>
+            </div>
+          </div>
+        </div>
+      `
+    })
+  }
+  html += '</div>'
+  container.innerHTML = html
+}
+
+function filterProduits(q) {
+  const cards = document.querySelectorAll('.item-card')
+  cards.forEach(c => {
+    c.style.display = c.dataset.nom.toLowerCase().includes(q.toLowerCase()) ? '' : 'none'
+  })
+}
+
+function filterProduitsCategorie(cat) {
+  const cards = document.querySelectorAll('.item-card')
+  cards.forEach(c => {
+    c.style.display = (!cat || c.dataset.cat === cat) ? '' : 'none'
+  })
+}
+
+async function editProduit(id) {
+  const doc = await sanityQuery(`*[_type == "produit" && _id == "${id}"][0] {
+    _id, nom, categorie, prix, prixOriginale, disponible, enVedette,
+    descriptionCourte, origine, artisan, dimensions, ordre,
+    "images": imagesPrincipales[] { _key, "ref": asset._ref, alt, caption }
+  }`)
+  editingDoc = doc
+  existingImages = doc.images || []
+  pendingImages = []
+  openModal('edit-produit')
+}
+
+async function openCreateModal() {
+  editingDoc = null
+  pendingImages = []
+  existingImages = []
+  ratingValue = 5
+
+  if (currentSection === 'produits') openModal('edit-produit')
+  else if (currentSection === 'galerie') openModal('edit-galerie')
+  else if (currentSection === 'temoignages') openModal('edit-temoignage')
+  else if (currentSection === 'pages') openModal('edit-page')
+}
+
+async function deleteProduit(id, nom) {
+  showConfirm(`Supprimer "${nom}" ?`, 'Cette action est définitive. Le produit sera supprimé de Sanity.', async () => {
+    await sanityMutate([{ delete: { id } }])
+    toast('Produit supprimé', 'success')
+    loadSection('produits')
+    refreshBadges()
+  })
+}
+
+async function saveProduit() {
+  const form = document.getElementById('form-produit')
+  const nom = form.querySelector('[name=nom]').value.trim()
+  if (!nom) { toast('Le nom est requis', 'error'); return; }
+
+  const btn = document.getElementById('btn-save')
+  btn.disabled = true
+  btn.textContent = 'Sauvegarde…'
+
+  try {
+    // Upload new images
+    const uploadedRefs = []
+    for (const pi of pendingImages) {
+      const assetId = await uploadImage(pi.file)
+      uploadedRefs.push({
+        _type: 'image',
+        _key: nanoid(),
+        asset: { _type: 'reference', _ref: assetId },
+        alt: pi.alt || nom,
+        caption: ''
+      })
+    }
+
+    // Build images array
+    const allImages = [
+      ...existingImages.map(img => ({
+        _type: 'image',
+        _key: img._key || nanoid(),
+        asset: { _type: 'reference', _ref: img.ref },
+        alt: img.alt || '',
+        caption: img.caption || ''
+      })),
+      ...uploadedRefs
+    ]
+
+    const doc = {
+      _type: 'produit',
+      nom,
+      categorie: form.querySelector('[name=categorie]').value,
+      prix: parseFloat(form.querySelector('[name=prix]').value) || null,
+      prixOriginale: parseFloat(form.querySelector('[name=prixOriginale]').value) || null,
+      descriptionCourte: form.querySelector('[name=descriptionCourte]').value.trim(),
+      origine: form.querySelector('[name=origine]').value.trim(),
+      artisan: form.querySelector('[name=artisan]').value.trim(),
+      dimensions: form.querySelector('[name=dimensions]').value.trim(),
+      ordre: parseInt(form.querySelector('[name=ordre]').value) || 99,
+      disponible: form.querySelector('[name=disponible]').checked,
+      enVedette: form.querySelector('[name=enVedette]').checked,
+      ...(allImages.length ? { imagesPrincipales: allImages } : {})
+    }
+
+    if (editingDoc) {
+      await sanityMutate([{ patch: { id: editingDoc._id, set: doc } }])
+      toast('Produit mis à jour ✓', 'success')
+    } else {
+      await sanityMutate([{ create: { ...doc, _id: `drafts.${nanoid()}` } }])
+      toast('Produit créé ✓', 'success')
+    }
+
+    closeModal()
+    loadSection('produits')
+    refreshBadges()
+  } catch (err) {
+    toast('Erreur : ' + err.message, 'error')
+    btn.disabled = false
+    btn.textContent = 'Sauvegarder'
+  }
+}
+
+// ─────────────────────────────────────────────────────────
+//  GALERIE
+// ─────────────────────────────────────────────────────────
+function renderGalerie(container) {
+  const cats = {
+    boutique: 'Boutique', artisans: 'Artisans', produits: 'Produits',
+    voyage: 'Maroc & Voyage', evenements: 'Événements'
+  }
+  let html = `
+    <div class="filter-bar">
+      <input type="search" placeholder="🔍 Rechercher…" oninput="filterTable(this.value, 'galerie-table')" />
+      <select onchange="filterTableCat(this.value, 'galerie-table', 'cat')">
+        <option value="">Toutes catégories</option>
+        ${Object.entries(cats).map(([v,l]) => `<option value="${v}">${l}</option>`).join('')}
+      </select>
+    </div>
+    <div class="items-table">
+      <table>
+        <thead><tr>
+          <th>Photo</th><th>Titre</th><th>Catégorie</th><th>Statut</th><th>Actions</th>
+        </tr></thead>
+        <tbody id="galerie-table">
+  `
+
+  if (!currentData.length) {
+    html += `<tr><td colspan="5" style="text-align:center;padding:40px;color:var(--gris)">Aucune photo dans la galerie</td></tr>`
+  } else {
+    currentData.forEach(g => {
+      const imgUrl = g.imageRef ? sanityImgUrl(g.imageRef, 120) : null
+      html += `
+        <tr data-titre="${escHtml(g.titre)}" data-cat="${g.categorie||''}">
+          <td>${imgUrl ? `<img class="table-img" src="${imgUrl}" loading="lazy" />` : '<div class="table-img-placeholder">🖼️</div>'}</td>
+          <td><strong>${escHtml(g.titre)}</strong></td>
+          <td><span class="pill pill-orange">${cats[g.categorie] || g.categorie || '—'}</span></td>
+          <td><span class="pill ${g.visible !== false ? 'pill-green' : 'pill-grey'}">${g.visible !== false ? 'Visible' : 'Masqué'}</span></td>
+          <td>
+            <button class="btn-edit" style="margin-right:6px" onclick="editGalerie('${g._id}')">✏️ Modifier</button>
+            <button class="btn-delete" onclick="deleteItem('${g._id}', '${escHtml(g.titre)}', 'galerie')">🗑️</button>
+          </td>
+        </tr>
+      `
+    })
+  }
+
+  html += `</tbody></table></div>`
+  container.innerHTML = html
+}
+
+async function editGalerie(id) {
+  const doc = await sanityQuery(`*[_type == "galerie" && _id == "${id}"][0] {
+    _id, titre, categorie, description, ordre, visible,
+    "imageRef": image.asset._ref
+  }`)
+  editingDoc = doc
+  existingImages = doc.imageRef ? [{ _key: nanoid(), ref: doc.imageRef, alt: doc.titre }] : []
+  pendingImages = []
+  openModal('edit-galerie')
+}
+
+async function saveGalerie() {
+  const form = document.getElementById('form-galerie')
+  const titre = form.querySelector('[name=titre]').value.trim()
+  if (!titre) { toast('Le titre est requis', 'error'); return; }
+
+  const btn = document.getElementById('btn-save')
+  btn.disabled = true; btn.textContent = 'Sauvegarde…'
+
+  try {
+    let imageField = {}
+    if (pendingImages.length) {
+      const assetId = await uploadImage(pendingImages[0].file)
+      imageField = { image: { _type: 'image', asset: { _type: 'reference', _ref: assetId } } }
+    } else if (existingImages.length) {
+      imageField = { image: { _type: 'image', asset: { _type: 'reference', _ref: existingImages[0].ref } } }
+    }
+
+    const doc = {
+      _type: 'galerie',
+      titre,
+      categorie: form.querySelector('[name=categorie]').value,
+      description: form.querySelector('[name=description]').value.trim(),
+      ordre: parseInt(form.querySelector('[name=ordre]').value) || 99,
+      visible: form.querySelector('[name=visible]').checked,
+      ...imageField
+    }
+
+    if (editingDoc) {
+      await sanityMutate([{ patch: { id: editingDoc._id, set: doc } }])
+      toast('Photo mise à jour ✓', 'success')
+    } else {
+      await sanityMutate([{ create: { ...doc, _id: `drafts.${nanoid()}` } }])
+      toast('Photo ajoutée ✓', 'success')
+    }
+
+    closeModal(); loadSection('galerie'); refreshBadges()
+  } catch (err) {
+    toast('Erreur : ' + err.message, 'error')
+    btn.disabled = false; btn.textContent = 'Sauvegarder'
+  }
+}
+
+// ─────────────────────────────────────────────────────────
+//  TÉMOIGNAGES
+// ─────────────────────────────────────────────────────────
+function renderTemoignages(container) {
+  let html = `
+    <div class="filter-bar">
+      <input type="search" placeholder="🔍 Rechercher…" oninput="filterTable(this.value, 'temo-table')" />
+    </div>
+    <div class="items-table">
+      <table>
+        <thead><tr>
+          <th>Client</th><th>Témoignage</th><th>Note</th><th>Statut</th><th>Actions</th>
+        </tr></thead>
+        <tbody id="temo-table">
+  `
+  if (!currentData.length) {
+    html += `<tr><td colspan="5" style="text-align:center;padding:40px;color:var(--gris)">Aucun témoignage</td></tr>`
+  } else {
+    currentData.forEach(t => {
+      const stars = '★'.repeat(t.note || 5) + '☆'.repeat(5 - (t.note || 5))
+      html += `
+        <tr data-titre="${escHtml(t.auteur)} ${escHtml(t.texte)}">
+          <td><strong>${escHtml(t.auteur)}</strong><br><small style="color:var(--gris)">${escHtml(t.ville || '')}</small></td>
+          <td style="max-width:280px;font-size:12px;color:var(--gris)">${escHtml((t.texte||'').substring(0,80))}…</td>
+          <td><span class="stars">${stars}</span></td>
+          <td><span class="pill ${t.visible !== false ? 'pill-green' : 'pill-grey'}">${t.visible !== false ? 'Visible' : 'Masqué'}</span>
+              ${t.enVedette ? ' <span class="pill pill-orange">Vedette</span>' : ''}</td>
+          <td>
+            <button class="btn-edit" style="margin-right:6px" onclick="editTemoignage('${t._id}')">✏️</button>
+            <button class="btn-delete" onclick="deleteItem('${t._id}', '${escHtml(t.auteur)}', 'temoignage')">🗑️</button>
+          </td>
+        </tr>
+      `
+    })
+  }
+  html += `</tbody></table></div>`
+  container.innerHTML = html
+}
+
+async function editTemoignage(id) {
+  const doc = await sanityQuery(`*[_type == "temoignage" && _id == "${id}"][0] {
+    _id, auteur, ville, texte, note, produitAchete, dateAchat, visible, enVedette,
+    "photoRef": photo.asset._ref
+  }`)
+  editingDoc = doc
+  ratingValue = doc.note || 5
+  existingImages = doc.photoRef ? [{ _key: nanoid(), ref: doc.photoRef, alt: doc.auteur }] : []
+  pendingImages = []
+  openModal('edit-temoignage')
+}
+
+async function saveTemoignage() {
+  const form = document.getElementById('form-temoignage')
+  const auteur = form.querySelector('[name=auteur]').value.trim()
+  const texte = form.querySelector('[name=texte]').value.trim()
+  if (!auteur || !texte) { toast('Nom et témoignage sont requis', 'error'); return; }
+
+  const btn = document.getElementById('btn-save')
+  btn.disabled = true; btn.textContent = 'Sauvegarde…'
+
+  try {
+    let photoField = {}
+    if (pendingImages.length) {
+      const assetId = await uploadImage(pendingImages[0].file)
+      photoField = { photo: { _type: 'image', asset: { _type: 'reference', _ref: assetId } } }
+    } else if (existingImages.length) {
+      photoField = { photo: { _type: 'image', asset: { _type: 'reference', _ref: existingImages[0].ref } } }
+    }
+
+    const doc = {
+      _type: 'temoignage',
+      auteur, texte,
+      note: ratingValue,
+      ville: form.querySelector('[name=ville]').value.trim(),
+      produitAchete: form.querySelector('[name=produitAchete]').value.trim(),
+      dateAchat: form.querySelector('[name=dateAchat]').value || null,
+      visible: form.querySelector('[name=visible]').checked,
+      enVedette: form.querySelector('[name=enVedette]').checked,
+      ...photoField
+    }
+
+    if (editingDoc) {
+      await sanityMutate([{ patch: { id: editingDoc._id, set: doc } }])
+      toast('Témoignage mis à jour ✓', 'success')
+    } else {
+      await sanityMutate([{ create: { ...doc, _id: `drafts.${nanoid()}` } }])
+      toast('Témoignage ajouté ✓', 'success')
+    }
+
+    closeModal(); loadSection('temoignages'); refreshBadges()
+  } catch (err) {
+    toast('Erreur : ' + err.message, 'error')
+    btn.disabled = false; btn.textContent = 'Sauvegarder'
+  }
+}
+
+// ─────────────────────────────────────────────────────────
+//  PAGES
+// ─────────────────────────────────────────────────────────
+function renderPages(container) {
+  const pageLabels = {
+    'accueil-hero': 'Accueil — Hero',
+    'accueil-presentation': 'Accueil — Présentation',
+    'univers': 'Notre Univers',
+    'histoire': 'Notre Histoire',
+    'contact': 'Contact'
+  }
+  let html = `
+    <div class="items-table">
+      <table>
+        <thead><tr>
+          <th>Page</th><th>Titre</th><th>Sous-titre</th><th>Statut</th><th>Actions</th>
+        </tr></thead>
+        <tbody>
+  `
+  if (!currentData.length) {
+    html += `<tr><td colspan="5" style="text-align:center;padding:40px;color:var(--gris)">Aucun contenu de page. Cliquez sur "+ Ajouter".</td></tr>`
+  } else {
+    currentData.forEach(p => {
+      html += `
+        <tr>
+          <td><strong>${pageLabels[p.page] || p.page}</strong></td>
+          <td>${escHtml(p.titre || '—')}</td>
+          <td style="font-size:12px;color:var(--gris);max-width:200px">${escHtml((p.sousTitre || '').substring(0,60))}</td>
+          <td><span class="pill ${p.actif !== false ? 'pill-green' : 'pill-grey'}">${p.actif !== false ? 'Actif' : 'Inactif'}</span></td>
+          <td>
+            <button class="btn-edit" style="margin-right:6px" onclick="editPage('${p._id}')">✏️ Modifier</button>
+            <button class="btn-delete" onclick="deleteItem('${p._id}', '${pageLabels[p.page] || p.page}', 'pageContenu')">🗑️</button>
+          </td>
+        </tr>
+      `
+    })
+  }
+  html += `</tbody></table></div>`
+  container.innerHTML = html
+}
+
+async function editPage(id) {
+  const doc = await sanityQuery(`*[_type == "pageContenu" && _id == "${id}"][0] {
+    _id, page, titre, sousTitre, actif, boutonTexte, boutonLien,
+    "imageRef": imageHero.asset._ref
+  }`)
+  editingDoc = doc
+  existingImages = doc.imageRef ? [{ _key: nanoid(), ref: doc.imageRef, alt: doc.titre }] : []
+  pendingImages = []
+  openModal('edit-page')
+}
+
+async function savePage() {
+  const form = document.getElementById('form-page')
+  const page = form.querySelector('[name=page]').value
+  if (!page) { toast('Sélectionnez une page', 'error'); return; }
+
+  const btn = document.getElementById('btn-save')
+  btn.disabled = true; btn.textContent = 'Sauvegarde…'
+
+  try {
+    let imageField = {}
+    if (pendingImages.length) {
+      const assetId = await uploadImage(pendingImages[0].file)
+      imageField = { imageHero: { _type: 'image', asset: { _type: 'reference', _ref: assetId } } }
+    } else if (existingImages.length) {
+      imageField = { imageHero: { _type: 'image', asset: { _type: 'reference', _ref: existingImages[0].ref } } }
+    }
+
+    const doc = {
+      _type: 'pageContenu',
+      page,
+      titre: form.querySelector('[name=titre]').value.trim(),
+      sousTitre: form.querySelector('[name=sousTitre]').value.trim(),
+      boutonTexte: form.querySelector('[name=boutonTexte]').value.trim(),
+      boutonLien: form.querySelector('[name=boutonLien]').value.trim(),
+      actif: form.querySelector('[name=actif]').checked,
+      ...imageField
+    }
+
+    if (editingDoc) {
+      await sanityMutate([{ patch: { id: editingDoc._id, set: doc } }])
+      toast('Page mise à jour ✓', 'success')
+    } else {
+      await sanityMutate([{ create: { ...doc, _id: `drafts.${nanoid()}` } }])
+      toast('Contenu de page créé ✓', 'success')
+    }
+
+    closeModal(); loadSection('pages'); refreshBadges()
+  } catch (err) {
+    toast('Erreur : ' + err.message, 'error')
+    btn.disabled = false; btn.textContent = 'Sauvegarder'
+  }
+}
+
+// ─────────────────────────────────────────────────────────
+//  GENERIC DELETE
+// ─────────────────────────────────────────────────────────
+function deleteItem(id, name, type) {
+  showConfirm(`Supprimer "${name}" ?`, 'Cette action est définitive.', async () => {
+    await sanityMutate([{ delete: { id } }])
+    toast('Supprimé ✓', 'success')
+    loadSection(currentSection)
+    refreshBadges()
+  })
+}
+
+// ─────────────────────────────────────────────────────────
+//  MODAL
+// ─────────────────────────────────────────────────────────
+function openModal(type) {
+  const overlay = document.getElementById('modal-overlay')
+  const title   = document.getElementById('modal-title')
+  const body    = document.getElementById('modal-body')
+  const footer  = document.getElementById('modal-footer')
+
+  const isEdit = !!editingDoc
+
+  if (type === 'edit-produit') {
+    const d = editingDoc || {}
+    title.textContent = isEdit ? `Modifier : ${d.nom}` : 'Nouveau produit'
+    body.innerHTML = buildProduitForm(d)
+    setupUploadZone('upload-produit', true)
+    renderExistingImages()
+  } else if (type === 'edit-galerie') {
+    const d = editingDoc || {}
+    title.textContent = isEdit ? `Modifier : ${d.titre}` : 'Nouvelle photo'
+    body.innerHTML = buildGalerieForm(d)
+    setupUploadZone('upload-galerie', false)
+    renderExistingImages()
+  } else if (type === 'edit-temoignage') {
+    const d = editingDoc || {}
+    title.textContent = isEdit ? `Modifier : ${d.auteur}` : 'Nouveau témoignage'
+    body.innerHTML = buildTemoignageForm(d)
+    setupUploadZone('upload-temo', false)
+    renderExistingImages()
+    setupStars()
+  } else if (type === 'edit-page') {
+    const d = editingDoc || {}
+    title.textContent = isEdit ? 'Modifier le contenu' : 'Nouveau contenu de page'
+    body.innerHTML = buildPageForm(d)
+    setupUploadZone('upload-page', false)
+    renderExistingImages()
+  }
+
+  const saveFns = {
+    'edit-produit': 'saveProduit',
+    'edit-galerie': 'saveGalerie',
+    'edit-temoignage': 'saveTemoignage',
+    'edit-page': 'savePage'
+  }
+
+  footer.innerHTML = `
+    <button class="btn-secondary" onclick="closeModal()">Annuler</button>
+    <button class="btn-primary-sm" id="btn-save" onclick="${saveFns[type]}()">
+      💾 Sauvegarder
+    </button>
+  `
+
+  overlay.style.display = 'flex'
+  document.body.style.overflow = 'hidden'
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').style.display = 'none'
+  document.body.style.overflow = ''
+  editingDoc = null
+  pendingImages = []
+  existingImages = []
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal()
+}
+
+// ─────────────────────────────────────────────────────────
+//  FORM BUILDERS
+// ─────────────────────────────────────────────────────────
+function buildProduitForm(d) {
+  return `
+    <form id="form-produit">
+      <div class="form-row">
+        <div class="form-group full">
+          <label>Nom du produit <span class="required">*</span></label>
+          <input class="form-control" name="nom" value="${escHtml(d.nom||'')}" placeholder="ex : Tapis Berbère Boujaad" required />
+        </div>
+        <div class="form-group">
+          <label>Catégorie <span class="required">*</span></label>
+          <select class="form-control" name="categorie">
+            <option value="">— Choisir —</option>
+            ${buildCatOptions(d.categorie, {tapis:'Tapis & Textiles',ceramique:'Céramique',bijoux:'Bijoux',maroquinerie:'Maroquinerie',bois:'Bois',metal:'Fer & Cuivre',autres:'Autres'})}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Prix (€)</label>
+          <input class="form-control" name="prix" type="number" min="0" step="0.01" value="${d.prix||''}" placeholder="ex : 180" />
+        </div>
+        <div class="form-group">
+          <label>Prix barré (€) — optionnel</label>
+          <input class="form-control" name="prixOriginale" type="number" min="0" step="0.01" value="${d.prixOriginale||''}" placeholder="ex : 220" />
+        </div>
+        <div class="form-group">
+          <label>Région / origine</label>
+          <input class="form-control" name="origine" value="${escHtml(d.origine||'')}" placeholder="ex : Fès" />
+        </div>
+        <div class="form-group">
+          <label>Artisan</label>
+          <input class="form-control" name="artisan" value="${escHtml(d.artisan||'')}" placeholder="ex : Fatima B." />
+        </div>
+        <div class="form-group">
+          <label>Dimensions / taille</label>
+          <input class="form-control" name="dimensions" value="${escHtml(d.dimensions||'')}" placeholder="ex : 120 x 80 cm" />
+        </div>
+        <div class="form-group">
+          <label>Ordre d'affichage</label>
+          <input class="form-control" name="ordre" type="number" value="${d.ordre??99}" />
+        </div>
+        <div class="form-group full">
+          <label>Description courte (carte produit)</label>
+          <textarea class="form-control" name="descriptionCourte" rows="2" maxlength="200" placeholder="Max 200 caractères">${escHtml(d.descriptionCourte||'')}</textarea>
+        </div>
+        <div class="form-group full" style="display:flex;gap:24px">
+          <label class="form-toggle">
+            <input class="toggle-input" type="checkbox" name="disponible" ${d.disponible!==false ? 'checked' : ''} />
+            <span class="toggle-track"></span>
+            Disponible à la vente
+          </label>
+          <label class="form-toggle">
+            <input class="toggle-input" type="checkbox" name="enVedette" ${d.enVedette ? 'checked' : ''} />
+            <span class="toggle-track"></span>
+            Mettre en vedette
+          </label>
+        </div>
+        <div class="form-group full">
+          <label>Photos du produit</label>
+          <div id="preview-grid-existing" class="preview-grid" style="margin-bottom:8px"></div>
+          <div class="upload-zone" id="upload-produit">
+            <input type="file" accept="image/*" multiple id="file-produit" />
+            <div class="upload-icon">📷</div>
+            <p>Glissez vos photos ici ou <strong>cliquez pour parcourir</strong></p>
+            <p style="font-size:11px;margin-top:4px">JPG, PNG, WebP — plusieurs fichiers acceptés</p>
+          </div>
+          <div class="upload-progress" id="upload-progress-produit">
+            <div class="upload-progress-bar" style="width:0%"></div>
+          </div>
+          <div class="preview-grid" id="preview-grid-new"></div>
+        </div>
+      </div>
+    </form>
+  `
+}
+
+function buildGalerieForm(d) {
+  return `
+    <form id="form-galerie">
+      <div class="form-group">
+        <label>Titre / légende <span class="required">*</span></label>
+        <input class="form-control" name="titre" value="${escHtml(d.titre||'')}" placeholder="ex : Poteries bleues de Fès" required />
+      </div>
+      <div class="form-group">
+        <label>Catégorie</label>
+        <select class="form-control" name="categorie">
+          <option value="">— Choisir —</option>
+          ${buildCatOptions(d.categorie, {boutique:'Boutique',artisans:'Artisans au travail',produits:'Produits',voyage:'Maroc & Voyage',evenements:'Événements'})}
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Description (optionnel)</label>
+        <textarea class="form-control" name="description" rows="2">${escHtml(d.description||'')}</textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Ordre d'affichage</label>
+          <input class="form-control" name="ordre" type="number" value="${d.ordre??99}" />
+        </div>
+        <div class="form-group" style="display:flex;align-items:flex-end;padding-bottom:4px">
+          <label class="form-toggle">
+            <input class="toggle-input" type="checkbox" name="visible" ${d.visible!==false ? 'checked' : ''} />
+            <span class="toggle-track"></span>
+            Visible sur le site
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Photo</label>
+        <div id="preview-grid-existing" class="preview-grid" style="margin-bottom:8px"></div>
+        <div class="upload-zone" id="upload-galerie">
+          <input type="file" accept="image/*" id="file-galerie" />
+          <div class="upload-icon">🖼️</div>
+          <p>Glissez votre photo ici ou <strong>cliquez pour parcourir</strong></p>
+        </div>
+        <div class="preview-grid" id="preview-grid-new"></div>
+      </div>
+    </form>
+  `
+}
+
+function buildTemoignageForm(d) {
+  return `
+    <form id="form-temoignage">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nom du client <span class="required">*</span></label>
+          <input class="form-control" name="auteur" value="${escHtml(d.auteur||'')}" required />
+        </div>
+        <div class="form-group">
+          <label>Ville / pays</label>
+          <input class="form-control" name="ville" value="${escHtml(d.ville||'')}" placeholder="Paris, France" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Note <span class="required">*</span></label>
+        <div class="star-rating" id="star-rating">
+          <span data-val="1">★</span><span data-val="2">★</span>
+          <span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Témoignage <span class="required">*</span></label>
+        <textarea class="form-control" name="texte" rows="4" required>${escHtml(d.texte||'')}</textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Produit acheté</label>
+          <input class="form-control" name="produitAchete" value="${escHtml(d.produitAchete||'')}" />
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input class="form-control" name="dateAchat" type="date" value="${d.dateAchat||''}" />
+        </div>
+      </div>
+      <div style="display:flex;gap:24px;margin-bottom:18px">
+        <label class="form-toggle">
+          <input class="toggle-input" type="checkbox" name="visible" ${d.visible!==false ? 'checked' : ''} />
+          <span class="toggle-track"></span>
+          Visible sur le site
+        </label>
+        <label class="form-toggle">
+          <input class="toggle-input" type="checkbox" name="enVedette" ${d.enVedette ? 'checked' : ''} />
+          <span class="toggle-track"></span>
+          En vedette
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Photo du client (optionnel)</label>
+        <div id="preview-grid-existing" class="preview-grid" style="margin-bottom:8px"></div>
+        <div class="upload-zone" id="upload-temo">
+          <input type="file" accept="image/*" id="file-temo" />
+          <div class="upload-icon">👤</div>
+          <p>Photo du client (optionnel)</p>
+        </div>
+        <div class="preview-grid" id="preview-grid-new"></div>
+      </div>
+    </form>
+  `
+}
+
+function buildPageForm(d) {
+  const pageOptions = [
+    ['accueil-hero','Accueil — Hero'],
+    ['accueil-presentation','Accueil — Présentation'],
+    ['univers','Notre Univers'],
+    ['histoire','Notre Histoire'],
+    ['contact','Contact']
+  ]
+  return `
+    <form id="form-page">
+      <div class="form-group">
+        <label>Page <span class="required">*</span></label>
+        <select class="form-control" name="page">
+          <option value="">— Choisir —</option>
+          ${pageOptions.map(([v,l]) => `<option value="${v}" ${d.page===v?'selected':''}>${l}</option>`).join('')}
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Titre principal</label>
+        <input class="form-control" name="titre" value="${escHtml(d.titre||'')}" placeholder="ex : L'artisanat du monde" />
+      </div>
+      <div class="form-group">
+        <label>Sous-titre / accroche</label>
+        <input class="form-control" name="sousTitre" value="${escHtml(d.sousTitre||'')}" placeholder="ex : Authenticité, savoir-faire, passion" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Texte bouton CTA</label>
+          <input class="form-control" name="boutonTexte" value="${escHtml(d.boutonTexte||'')}" placeholder="ex : Voir la collection" />
+        </div>
+        <div class="form-group">
+          <label>Lien bouton CTA</label>
+          <input class="form-control" name="boutonLien" value="${escHtml(d.boutonLien||'')}" placeholder="/galerie.html" />
+        </div>
+      </div>
+      <div style="margin-bottom:18px">
+        <label class="form-toggle">
+          <input class="toggle-input" type="checkbox" name="actif" ${d.actif!==false ? 'checked' : ''} />
+          <span class="toggle-track"></span>
+          Contenu actif (affiché sur le site)
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Image d'en-tête (optionnel)</label>
+        <div id="preview-grid-existing" class="preview-grid" style="margin-bottom:8px"></div>
+        <div class="upload-zone" id="upload-page">
+          <input type="file" accept="image/*" id="file-page" />
+          <div class="upload-icon">🏔️</div>
+          <p>Image de fond ou d'en-tête de la page</p>
+        </div>
+        <div class="preview-grid" id="preview-grid-new"></div>
+      </div>
+    </form>
+  `
+}
+
+function buildCatOptions(selected, map) {
+  return Object.entries(map).map(([v,l]) =>
+    `<option value="${v}" ${selected===v?'selected':''}>${l}</option>`
+  ).join('')
+}
+
+// ─────────────────────────────────────────────────────────
+//  IMAGE UPLOAD
+// ─────────────────────────────────────────────────────────
+function setupUploadZone(zoneId, multiple) {
+  const zone = document.getElementById(zoneId)
+  if (!zone) return
+  const fileInput = zone.querySelector('input[type=file]')
+
+  zone.addEventListener('click', () => fileInput.click())
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover') })
+  zone.addEventListener('dragleave', () => zone.classList.remove('dragover'))
+  zone.addEventListener('drop', e => {
+    e.preventDefault(); zone.classList.remove('dragover')
+    handleFiles(Array.from(e.dataTransfer.files))
+  })
+  fileInput.addEventListener('change', () => handleFiles(Array.from(fileInput.files)))
+}
+
+function handleFiles(files) {
+  files.forEach(file => {
+    if (!file.type.startsWith('image/')) return
+    const reader = new FileReader()
+    reader.onload = e => {
+      pendingImages.push({ file, preview: e.target.result, alt: file.name.replace(/\.[^.]+$/, '') })
+      renderNewPreviews()
+    }
+    reader.readAsDataURL(file)
+  })
+}
+
+function renderExistingImages() {
+  const grid = document.getElementById('preview-grid-existing')
+  if (!grid) return
+  grid.innerHTML = existingImages.map((img, i) => {
+    const url = sanityImgUrl(img.ref, 200)
+    return url ? `
+      <div class="preview-item">
+        <img src="${url}" />
+        <button class="remove-img" onclick="removeExistingImage(${i})">✕</button>
+      </div>
+    ` : ''
+  }).join('')
+}
+
+function removeExistingImage(i) {
+  existingImages.splice(i, 1)
+  renderExistingImages()
+}
+
+function renderNewPreviews() {
+  const grid = document.getElementById('preview-grid-new')
+  if (!grid) return
+  grid.innerHTML = pendingImages.map((img, i) => `
+    <div class="preview-item">
+      <img src="${img.preview}" />
+      <button class="remove-img" onclick="removePendingImage(${i})">✕</button>
+    </div>
+  `).join('')
+}
+
+function removePendingImage(i) {
+  pendingImages.splice(i, 1)
+  renderNewPreviews()
+}
+
+// ─────────────────────────────────────────────────────────
+//  STARS RATING
+// ─────────────────────────────────────────────────────────
+function setupStars() {
+  const container = document.getElementById('star-rating')
+  if (!container) return
+  updateStars(ratingValue)
+  container.querySelectorAll('span').forEach(star => {
+    star.addEventListener('mouseenter', () => updateStars(parseInt(star.dataset.val)))
+    star.addEventListener('mouseleave', () => updateStars(ratingValue))
+    star.addEventListener('click', () => { ratingValue = parseInt(star.dataset.val); updateStars(ratingValue) })
+  })
+}
+
+function updateStars(val) {
+  const container = document.getElementById('star-rating')
+  if (!container) return
+  container.querySelectorAll('span').forEach((s, i) => {
+    s.classList.toggle('active', i < val)
+  })
+}
+
+// ─────────────────────────────────────────────────────────
+//  FILTER HELPERS
+// ─────────────────────────────────────────────────────────
+function filterTable(q, tableId) {
+  document.querySelectorAll(`#${tableId} tr`).forEach(row => {
+    row.style.display = (row.dataset.titre || '').toLowerCase().includes(q.toLowerCase()) ? '' : 'none'
+  })
+}
+
+function filterTableCat(cat, tableId, field) {
+  document.querySelectorAll(`#${tableId} tr`).forEach(row => {
+    row.style.display = (!cat || row.dataset[field] === cat) ? '' : 'none'
+  })
+}
+
+// ─────────────────────────────────────────────────────────
+//  CONFIRM
+// ─────────────────────────────────────────────────────────
+function showConfirm(title, text, cb) {
+  document.getElementById('confirm-overlay').style.display = 'flex'
+  document.querySelector('#confirm-overlay h3').textContent = title
+  document.getElementById('confirm-text').textContent = text
+  confirmCallback = cb
+  document.getElementById('confirm-ok-btn').onclick = async () => {
+    closeConfirm()
+    try { await cb() } catch (err) { toast('Erreur : ' + err.message, 'error') }
+  }
+}
+
+function closeConfirm() {
+  document.getElementById('confirm-overlay').style.display = 'none'
+}
+
+// ─────────────────────────────────────────────────────────
+//  TOAST
+// ─────────────────────────────────────────────────────────
+function toast(msg, type = '') {
+  const container = document.getElementById('toast-container')
+  const el = document.createElement('div')
+  el.className = `toast ${type}`
+  el.innerHTML = `${type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ'} ${msg}`
+  container.appendChild(el)
+  setTimeout(() => el.remove(), 3500)
+}
+
+// ─────────────────────────────────────────────────────────
+//  UTILS
+// ─────────────────────────────────────────────────────────
+function escHtml(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')
+}
+
+function nanoid() {
+  return Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10)
+}
+
+// ─────────────────────────────────────────────────────────
+//  INIT
+// ─────────────────────────────────────────────────────────
+window.addEventListener('load', () => {
+  const saved = localStorage.getItem('ob_admin_token')
+  if (saved) {
+    TOKEN = saved
+    bootApp()
+  }
+
+  // Enter key on login
+  document.getElementById('token-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') handleLogin()
+  })
+})
+</script>
+</body>
+</html>
