@@ -1442,7 +1442,7 @@ async function saveProduit() {
       await sanityMutate([{ patch: { id: editingDoc._id, set: doc } }])
       toast('Produit mis à jour ✓', 'success')
     } else {
-      await sanityMutate([{ create: { ...doc, _id: `drafts.${nanoid()}` } }])
+      await sanityMutate([{ create: { ...doc, _id: nanoid() } }])
       toast('Produit créé ✓', 'success')
     }
 
@@ -1546,7 +1546,7 @@ async function saveGalerie() {
       await sanityMutate([{ patch: { id: editingDoc._id, set: doc } }])
       toast('Photo mise à jour ✓', 'success')
     } else {
-      await sanityMutate([{ create: { ...doc, _id: `drafts.${nanoid()}` } }])
+      await sanityMutate([{ create: { ...doc, _id: nanoid() } }])
       toast('Photo ajoutée ✓', 'success')
     }
 
@@ -1642,7 +1642,7 @@ async function saveTemoignage() {
       await sanityMutate([{ patch: { id: editingDoc._id, set: doc } }])
       toast('Témoignage mis à jour ✓', 'success')
     } else {
-      await sanityMutate([{ create: { ...doc, _id: `drafts.${nanoid()}` } }])
+      await sanityMutate([{ create: { ...doc, _id: nanoid() } }])
       toast('Témoignage ajouté ✓', 'success')
     }
 
@@ -1737,7 +1737,7 @@ async function savePage() {
       await sanityMutate([{ patch: { id: editingDoc._id, set: doc } }])
       toast('Page mise à jour ✓', 'success')
     } else {
-      await sanityMutate([{ create: { ...doc, _id: `drafts.${nanoid()}` } }])
+      await sanityMutate([{ create: { ...doc, _id: nanoid() } }])
       toast('Contenu de page créé ✓', 'success')
     }
 
