@@ -1026,6 +1026,10 @@
         <span class="icon">📄</span> Pages
         <span class="badge" id="badge-pages">—</span>
       </a>
+      <a class="nav-item" onclick="navigate('categories')" href="#">
+        <span class="icon">🗂️</span> Catégories
+        <span class="badge" id="badge-categories">5</span>
+      </a>
 
       <div class="nav-section-title">Liens</div>
       <a class="nav-item" href="https://odyssee-berbere.sanity.studio" target="_blank">
@@ -1270,6 +1274,12 @@ async function loadSection(section) {
         "imageRef": imageHero.asset._ref
       }`)
       renderPages(content)
+    } else if (section === 'categories') {
+      currentData = await sanityQuery(`*[_type == "categorie"] | order(ordre asc) {
+        _id, label, "slug": slug.current, description,
+        "imageRef": image.asset._ref
+      }`)
+      renderCategories(content)
     }
   } catch (err) {
     const isCors = err.message.includes('fetch') || err.message.includes('network') || err.message.includes('Failed')
@@ -2209,6 +2219,103 @@ function toast(msg, type = '') {
 // ─────────────────────────────────────────────────────────
 function escHtml(str) {
   return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')
+}
+
+// ─────────────────────────────────────────────────────────
+//  CATÉGORIES — Photos des blocs de la page d'accueil
+// ─────────────────────────────────────────────────────────
+const CAT_DEFS = [
+  { slug: 'tapis',      label: 'Tapis Berbères',   icon: '🏔️' },
+  { slug: 'poteries',   label: 'Jarres & Poteries', icon: '🫙' },
+  { slug: 'luminaires', label: 'Luminaires',        icon: '🪔' },
+  { slug: 'table',      label: 'Art de la Table',   icon: '🍽️' },
+  { slug: 'deco',       label: 'Décoration',        icon: '🪬' },
+]
+
+function renderCategories(container) {
+  // Indexer les docs existants par slug
+  const bySlug = {}
+  ;(currentData || []).forEach(c => { if (c.slug) bySlug[c.slug] = c })
+
+  let html = `<div class="content-header">
+    <h2 class="content-title">🗂️ Photos des catégories</h2>
+    <p style="color:var(--gris);font-size:13px;margin-top:6px">Ces photos remplacent les fonds colorés sur la page d'accueil et la page Univers.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;padding:24px">`
+
+  CAT_DEFS.forEach(def => {
+    const doc = bySlug[def.slug]
+    const imgRef = doc ? doc.imageRef : null
+    const imgUrl = imgRef ? imgRefToUrl(imgRef, 600) : null
+    const docId  = doc ? doc._id : null
+
+    html += `<div class="cat-card" style="background:var(--blanc);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)">
+      <div style="position:relative;height:180px;background:var(--gris-clair);overflow:hidden">
+        ${imgUrl
+          ? `<img src="${imgUrl}" style="width:100%;height:100%;object-fit:cover" alt="${def.label}">`
+          : `<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:48px;opacity:.3">${def.icon}</div>`
+        }
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent);display:flex;align-items:flex-end;padding:12px">
+          <span style="color:#fff;font-weight:600;font-size:15px">${def.label}</span>
+        </div>
+      </div>
+      <div style="padding:16px;display:flex;gap:10px;align-items:center">
+        <label style="flex:1;cursor:pointer">
+          <input type="file" accept="image/*" style="display:none"
+            onchange="uploadCategoriePic(this,'${def.slug}','${escHtml(def.label)}','${docId||''}')">
+          <span class="btn btn--primary" style="display:block;text-align:center;font-size:13px;padding:8px 14px">
+            📸 ${imgUrl ? 'Changer la photo' : 'Ajouter une photo'}
+          </span>
+        </label>
+        ${imgUrl && docId ? `<button onclick="deleteCategorieImg('${docId}','${escHtml(def.label)}')" class="btn-delete" style="padding:8px 12px;font-size:13px">🗑️</button>` : ''}
+      </div>
+    </div>`
+  })
+
+  html += '</div>'
+  container.innerHTML = html
+}
+
+async function uploadCategoriePic(input, slug, label, existingId) {
+  const file = input.files[0]
+  if (!file) return
+  toast('Upload en cours…')
+  try {
+    const assetId = await sanityUpload(file)
+    const doc = {
+      _type: 'categorie',
+      label,
+      slug: { _type: 'slug', current: slug },
+      image: { _type: 'image', asset: { _type: 'reference', _ref: assetId } },
+      ordre: CAT_DEFS.findIndex(c => c.slug === slug),
+    }
+    if (existingId) {
+      await sanityMutate([{ patch: { id: existingId, set: { image: doc.image } } }])
+    } else {
+      await sanityMutate([{ createOrReplace: { ...doc, _id: 'categorie-' + slug } }])
+    }
+    toast(`Photo "${label}" enregistrée ✓`, 'success')
+    navigate('categories')
+  } catch (e) {
+    toast('Erreur : ' + e.message, 'error')
+  }
+}
+
+async function deleteCategorieImg(id, label) {
+  if (!confirm(`Supprimer la photo de "${label}" ?`)) return
+  await sanityMutate([{ patch: { id, unset: ['image'] } }])
+  toast(`Photo supprimée`, 'success')
+  navigate('categories')
+}
+
+function imgRefToUrl(ref, w) {
+  if (!ref) return null
+  const parts = ref.split('-')
+  if (parts.length < 4) return null
+  const id   = parts[1]
+  const dims = parts[2]
+  const ext  = parts[3]
+  return `${IMG_BASE}/${id}-${dims}.${ext}?w=${w}&q=80&auto=format&fit=crop`
 }
 
 function nanoid() {
