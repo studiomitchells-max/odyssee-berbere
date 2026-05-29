@@ -1,5 +1,5 @@
 /**
- * contact.js — Formulaire de contact via FormSubmit.co
+ * contact.js — Formulaire de contact via FormSubmit.co (soumission native)
  */
 
 (function () {
@@ -9,9 +9,7 @@
   if (!form) return;
 
   form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    /* Validation */
+    /* Validation uniquement */
     const required = form.querySelectorAll('[required]');
     let valid = true;
     required.forEach(field => {
@@ -21,45 +19,20 @@
         valid = false;
       }
     });
+
     if (!valid) {
+      e.preventDefault();
       form.querySelector('.is-error').focus();
       return;
     }
 
+    /* Laisser le formulaire se soumettre normalement vers FormSubmit */
     const submitBtn = form.querySelector('.form-submit');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Envoi en cours…';
-
-    /* Envoi réel via FormSubmit */
-    const data = new FormData(form);
-
-    fetch(form.action, {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    })
-    .then(function(res) {
-      if (res.ok) {
-        form.reset();
-        if (successMsg) {
-          successMsg.hidden = false;
-          successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          setTimeout(() => { successMsg.hidden = true; }, 6000);
-        }
-      } else {
-        alert('Une erreur est survenue. Merci de réessayer ou de nous contacter par WhatsApp.');
-      }
-    })
-    .catch(function() {
-      alert('Impossible d\'envoyer le message. Vérifiez votre connexion ou contactez-nous par WhatsApp.');
-    })
-    .finally(function() {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Envoyer le message';
-    });
+    /* Pas de e.preventDefault() — soumission native */
   });
 
-  /* Retire la classe d'erreur à la saisie */
   form.querySelectorAll('.form-input, .form-textarea').forEach(field => {
     field.addEventListener('input', () => field.classList.remove('is-error'));
   });
@@ -67,5 +40,12 @@
   const style = document.createElement('style');
   style.textContent = '.form-input.is-error, .form-textarea.is-error { border-color: #C0392B; box-shadow: 0 0 0 3px rgba(192,57,43,0.12); }';
   document.head.appendChild(style);
+
+  /* Afficher message succès si ?merci=1 dans l'URL */
+  if (window.location.search.includes('merci=1') && successMsg) {
+    successMsg.hidden = false;
+    successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    setTimeout(() => { successMsg.hidden = true; }, 6000);
+  }
 
 })();
