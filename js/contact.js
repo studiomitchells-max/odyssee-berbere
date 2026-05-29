@@ -1,5 +1,5 @@
 /**
- * contact.js — Gestion du formulaire de contact
+ * contact.js — Formulaire de contact via FormSubmit.co
  */
 
 (function () {
@@ -11,10 +11,9 @@
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    /* Validation simple */
+    /* Validation */
     const required = form.querySelectorAll('[required]');
     let valid = true;
-
     required.forEach(field => {
       field.classList.remove('is-error');
       if (!field.value.trim()) {
@@ -22,44 +21,51 @@
         valid = false;
       }
     });
-
     if (!valid) {
-      const firstError = form.querySelector('.is-error');
-      if (firstError) firstError.focus();
+      form.querySelector('.is-error').focus();
       return;
     }
 
-    /* Simulation d'envoi (à remplacer par votre backend ou service d'email) */
     const submitBtn = form.querySelector('.form-submit');
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Envoi en cours...';
+    submitBtn.textContent = 'Envoi en cours…';
 
-    /* Simule un délai réseau */
-    setTimeout(() => {
-      form.reset();
+    /* Envoi réel via FormSubmit */
+    const data = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function(res) {
+      if (res.ok) {
+        form.reset();
+        if (successMsg) {
+          successMsg.hidden = false;
+          successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          setTimeout(() => { successMsg.hidden = true; }, 6000);
+        }
+      } else {
+        alert('Une erreur est survenue. Merci de réessayer ou de nous contacter par WhatsApp.');
+      }
+    })
+    .catch(function() {
+      alert('Impossible d\'envoyer le message. Vérifiez votre connexion ou contactez-nous par WhatsApp.');
+    })
+    .finally(function() {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Envoyer le message';
-
-      if (successMsg) {
-        successMsg.hidden = false;
-        successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-
-      /* Cache le message après 6 secondes */
-      setTimeout(() => {
-        if (successMsg) successMsg.hidden = true;
-      }, 6000);
-    }, 800);
+    });
   });
 
   /* Retire la classe d'erreur à la saisie */
-  form.querySelectorAll('.form-input').forEach(field => {
+  form.querySelectorAll('.form-input, .form-textarea').forEach(field => {
     field.addEventListener('input', () => field.classList.remove('is-error'));
   });
 
-  /* Style erreur (injecté inline pour éviter un fichier CSS supplémentaire) */
   const style = document.createElement('style');
-  style.textContent = '.form-input.is-error { border-color: #C0392B; box-shadow: 0 0 0 3px rgba(192,57,43,0.12); }';
+  style.textContent = '.form-input.is-error, .form-textarea.is-error { border-color: #C0392B; box-shadow: 0 0 0 3px rgba(192,57,43,0.12); }';
   document.head.appendChild(style);
 
 })();
