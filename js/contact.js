@@ -1,5 +1,5 @@
 /**
- * contact.js — Formulaire de contact via FormSubmit.co (soumission native)
+ * contact.js — Formulaire de contact (mailto fallback)
  */
 
 (function () {
@@ -9,7 +9,9 @@
   if (!form) return;
 
   form.addEventListener('submit', function (e) {
-    /* Validation uniquement */
+    e.preventDefault();
+
+    /* Validation */
     const required = form.querySelectorAll('[required]');
     let valid = true;
     required.forEach(field => {
@@ -19,18 +21,31 @@
         valid = false;
       }
     });
-
     if (!valid) {
-      e.preventDefault();
       form.querySelector('.is-error').focus();
       return;
     }
 
-    /* Laisser le formulaire se soumettre normalement vers FormSubmit */
-    const submitBtn = form.querySelector('.form-submit');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Envoi en cours…';
-    /* Pas de e.preventDefault() — soumission native */
+    const prenom  = form.querySelector('[name=prenom]')?.value || '';
+    const nom     = form.querySelector('[name=nom]')?.value || '';
+    const email   = form.querySelector('[name=email]')?.value || '';
+    const sujet   = form.querySelector('[name=sujet]')?.value || '';
+    const message = form.querySelector('[name=message]')?.value || '';
+
+    const corps = `Bonjour,\n\nMessage de : ${prenom} ${nom}\nEmail : ${email}\nSujet : ${sujet}\n\n${message}`;
+    const mailtoUrl = `mailto:contact.odyssee.berbere@gmail.com`
+      + `?subject=${encodeURIComponent('Message depuis le site — ' + (sujet || 'Contact'))}`
+      + `&body=${encodeURIComponent(corps)}`;
+
+    window.location.href = mailtoUrl;
+
+    /* Message de confirmation */
+    form.reset();
+    if (successMsg) {
+      successMsg.hidden = false;
+      successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      setTimeout(() => { successMsg.hidden = true; }, 8000);
+    }
   });
 
   form.querySelectorAll('.form-input, .form-textarea').forEach(field => {
@@ -41,10 +56,8 @@
   style.textContent = '.form-input.is-error, .form-textarea.is-error { border-color: #C0392B; box-shadow: 0 0 0 3px rgba(192,57,43,0.12); }';
   document.head.appendChild(style);
 
-  /* Afficher message succès si ?merci=1 dans l'URL */
   if (window.location.search.includes('merci=1') && successMsg) {
     successMsg.hidden = false;
-    successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     setTimeout(() => { successMsg.hidden = true; }, 6000);
   }
 
