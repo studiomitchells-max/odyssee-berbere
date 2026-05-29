@@ -168,6 +168,28 @@ if (SANITY_CONFIG.projectId === 'YOUR_PROJECT_ID') {
           href:  'univers.html#' + c.slug,
         };
       });
+
+      /* ── Injecter les photos dans les blocs catégorie du DOM ── */
+      categories.forEach(function(c) {
+        if (!c.slug || !c.image || !c.image.asset) return;
+        var imgUrl = sanityImageUrl(c.image, 1400);
+        if (!imgUrl) return;
+
+        /* index.html — .ucard-bg--{slug} > .ucard-img */
+        document.querySelectorAll('.ucard-bg--' + c.slug + ' .ucard-img').forEach(function(img) {
+          img.src = imgUrl;
+          img.onload = function() { img.classList.add('is-loaded'); };
+          if (img.complete && img.naturalWidth) img.classList.add('is-loaded');
+        });
+
+        /* univers.html — .ucard-bg--{slug} > .univers-photo */
+        document.querySelectorAll('.ucard-bg--' + c.slug + ' .univers-photo,' +
+          '.univers-img-wrap.ucard-bg--' + c.slug + ' .univers-photo').forEach(function(img) {
+          img.src = imgUrl;
+          img.onload = function() { img.classList.add('is-loaded'); };
+          if (img.complete && img.naturalWidth) img.classList.add('is-loaded');
+        });
+      });
     }
 
     /* Paramètres du site (titre hero, adresse, réseaux…) */
