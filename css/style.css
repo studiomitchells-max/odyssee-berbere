@@ -693,6 +693,12 @@ button {
 .ucard-bg--deco {
   background: linear-gradient(145deg, #1E2A32 0%, #3A5260 42%, #6A8C98 75%, #A8C2CC 100%);
 }
+.ucard-bg--textile {
+  background: linear-gradient(145deg, #2A1A2E 0%, #5A3060 42%, #9A6898 75%, #C8A8CC 100%);
+}
+.ucard-bg--vannerie {
+  background: linear-gradient(145deg, #2E2A1A 0%, #5A5030 42%, #9A8850 75%, #C8B880 100%);
+}
 
 .ucard-img {
   position: absolute;
@@ -908,6 +914,8 @@ button {
 .pcard-bg--luminaire { background: linear-gradient(160deg, #20140A 0%, #4A2C12 50%, #8A5020 85%, #B87838 100%); }
 .pcard-bg--table     { background: linear-gradient(160deg, #303A2C 0%, #526040 50%, #8A9E72 85%, #BEC89C 100%); }
 .pcard-bg--deco      { background: linear-gradient(160deg, #242E38 0%, #3C5468 50%, #6A8CA0 85%, #A4C4D0 100%); }
+.pcard-bg--textile   { background: linear-gradient(160deg, #2A1A2E 0%, #5A3060 50%, #9A6898 85%, #C8A8CC 100%); }
+.pcard-bg--vannerie  { background: linear-gradient(160deg, #2E2A1A 0%, #5A5030 50%, #9A8850 85%, #C8B880 100%); }
 
 .pcard-photo {
   position: absolute;
