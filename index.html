@@ -3,436 +3,248 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Odyssée Berbère — Artisanat marocain contemporain. Tapis berbères, poteries, luminaires et objets de décoration sélectionnés avec soin.">
-  <title>Odyssée Berbère — Artisanat Marocain & Décoration</title>
-
-  <!-- Google Fonts -->
+  <meta name="description" content="Odyssée Berbère — Artisanat marocain & décoration contemporaine. Boutique à Agen. Site en cours de finalisation.">
+  <title>Odyssée Berbère — Bientôt disponible</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  <link rel="stylesheet" href="css/style.css">
+    :root {
+      --terracotta: #C06B3C;
+      --vert: #2D4A3E;
+      --sable: #F5ECD7;
+      --noir: #1A1208;
+      --gris: #6B6259;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--noir);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ── Fond ── */
+    .bg {
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(160deg, rgba(45,74,62,.85) 0%, rgba(26,18,8,.95) 60%),
+        url('images/story/histoire.jpg') center/cover no-repeat;
+      z-index: 0;
+    }
+
+    /* ── Layout ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    /* ── Logo ── */
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 6vw, 3.8rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .logo-tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+      display: block;
+      margin-bottom: 48px;
+    }
+
+    /* ── Séparateur ── */
+    .sep {
+      width: 48px;
+      height: 1px;
+      background: var(--terracotta);
+      margin: 0 auto 48px;
+      opacity: .8;
+    }
+
+    /* ── Message ── */
+    .titre {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.25;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .titre em {
+      font-style: italic;
+      color: #e8c49a;
+    }
+
+    .desc {
+      font-size: 15px;
+      color: rgba(255,255,255,.6);
+      line-height: 1.7;
+      max-width: 420px;
+      margin: 0 auto 48px;
+    }
+
+    /* ── Bouton Instagram ── */
+    .btn-insta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 14px 28px;
+      border-radius: 50px;
+      letter-spacing: 0.3px;
+      transition: transform .2s, box-shadow .2s;
+      margin-bottom: 16px;
+    }
+
+    .btn-insta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(220, 39, 67, .35);
+    }
+
+    .btn-insta svg { flex-shrink: 0; }
+
+    /* ── WhatsApp ── */
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 14px 28px;
+      border-radius: 50px;
+      letter-spacing: 0.3px;
+      transition: transform .2s, box-shadow .2s;
+      margin-bottom: 48px;
+    }
+
+    .btn-wa:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37, 211, 102, .35);
+    }
+
+    .btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 48px; }
+
+    /* ── Infos boutique ── */
+    .boutique {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 36px;
+      max-width: 340px;
+      margin: 0 auto;
+    }
+
+    .boutique-label {
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 14px;
+    }
+
+    .boutique address {
+      font-style: normal;
+      font-size: 14px;
+      color: rgba(255,255,255,.55);
+      line-height: 2;
+    }
+
+    .boutique a {
+      color: rgba(255,255,255,.7);
+      text-decoration: none;
+    }
+
+    .boutique a:hover { color: #fff; }
+
+    /* ── Footer ── */
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 11px;
+      color: rgba(255,255,255,.2);
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════
-       NAVIGATION
-  ══════════════════════════════════════ -->
-  <header class="site-header" id="siteHeader">
-    <nav class="nav-inner container">
+  <div class="bg"></div>
 
-      <a href="index.html" class="logo" aria-label="Odyssée Berbère — Accueil">
-        <span class="logo-name">Odyssée Berbère</span>
-        <span class="logo-tag">Artisanat & Décoration</span>
+  <div class="page">
+
+    <span class="logo">Odyssée Berbère</span>
+    <span class="logo-tag">Artisanat & Décoration</span>
+
+    <div class="sep"></div>
+
+    <h1 class="titre">
+      Notre site est en cours<br>
+      <em>de finalisation</em>
+    </h1>
+
+    <p class="desc">
+      Nous préparons quelque chose de beau.<br>
+      En attendant, retrouvez nos créations et toute l'actualité de la boutique sur Instagram.
+    </p>
+
+    <div class="btns">
+      <a href="https://www.instagram.com/odyssee_berbere" class="btn-insta" target="_blank" rel="noopener noreferrer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+        Nous suivre sur Instagram
       </a>
 
-      <ul class="nav-links" id="navLinks" role="list">
-        <li><a href="univers.html" class="nav-link">Nos Univers</a></li>
-        <li><a href="histoire.html" class="nav-link">Notre Histoire</a></li>
-        <li><a href="galerie.html" class="nav-link">Galerie</a></li>
-        <li><a href="contact.html" class="nav-link">Boutique</a></li>
-      </ul>
-
-      <div class="nav-right">
-        <a href="contact.html" class="btn-visit">Nous rendre visite</a>
-        <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-
-    </nav>
-  </header>
-
-
-  <main>
-
-    <!-- ══════════════════════════════════════
-         HERO
-         VIDÉO  : images/hero/hero-video.mp4  (recommandé : 1920×1080, muet, ~10s, loop)
-         PHOTO  : images/hero/hero-main.jpg   (fallback si pas de vidéo)
-         → Déposez votre fichier .mp4 dans images/hero/ et la vidéo se lance automatiquement
-    ══════════════════════════════════════ -->
-    <section class="hero" id="hero">
-      <div class="hero-bg">
-        <!-- Vidéo (se cache automatiquement si le fichier est absent) -->
-        <video
-          class="hero-video"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          aria-hidden="true"
-        >
-          <source src="images/hero/hero-video.mp4" type="video/mp4">
-          <source src="images/hero/hero-video.webm" type="video/webm">
-        </video>
-        <!-- Image de fallback (s'affiche si pas de vidéo) -->
-        <img
-          src="images/hero/hero-main.jpg"
-          alt=""
-          class="hero-img"
-          data-site-img="hero-main"
-          aria-hidden="true"
-        >
-      </div>
-      <div class="hero-overlay"></div>
-
-      <div class="hero-content container">
-        <div class="hero-text" data-animate>
-          <span class="eyebrow eyebrow--light">Collection 2026</span>
-          <h1 class="hero-title">
-            L'âme du Maroc<br>
-            <em>dans votre intérieur</em>
-          </h1>
-          <p class="hero-sub">
-            Pièces artisanales sélectionnées avec soin,<br>
-            entre tradition berbère et esthétique contemporaine.
-          </p>
-          <div class="hero-cta">
-            <a href="univers.html" class="btn btn--primary">Découvrir la collection</a>
-            <a href="contact.html" class="btn btn--ghost">Nous rendre visite</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-scroll" aria-hidden="true">
-        <span>Défiler</span>
-        <div class="scroll-bar"></div>
-      </div>
-    </section>
-
-
-    <!-- ══════════════════════════════════════
-         PILLARS
-    ══════════════════════════════════════ -->
-    <section class="pillars">
-      <div class="container">
-        <div class="pillars-grid">
-          <div class="pillar" data-animate>
-            <div class="pillar-mark">✦</div>
-            <h3>Authentique</h3>
-            <p>Chaque pièce est sélectionnée directement auprès des artisans marocains.</p>
-          </div>
-          <div class="pillar-sep" aria-hidden="true"></div>
-          <div class="pillar" data-animate data-delay="120">
-            <div class="pillar-mark">✦</div>
-            <h3>Unique</h3>
-            <p>Des objets singuliers, façonnés à la main, qui ne ressemblent à aucun autre.</p>
-          </div>
-          <div class="pillar-sep" aria-hidden="true"></div>
-          <div class="pillar" data-animate data-delay="240">
-            <div class="pillar-mark">✦</div>
-            <h3>Contemporain</h3>
-            <p>Un regard actuel sur le savoir-faire berbère pour sublimer votre espace de vie.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ══════════════════════════════════════
-         NOS UNIVERS
-         PHOTOS : images/categories/*.jpg (400×550px chacune)
-    ══════════════════════════════════════ -->
-    <section class="univers-section" id="univers">
-      <div class="container">
-        <div class="section-head" data-animate>
-          <span class="eyebrow">Explorer</span>
-          <h2 class="section-title">Nos Univers</h2>
-          <p class="section-desc">Cinq univers, un seul fil conducteur&nbsp;: la beauté du geste artisanal.</p>
-        </div>
-      </div>
-
-      <div class="univers-grid container">
-
-        <!-- Large card — Tapis -->
-        <article class="ucard ucard--large" data-animate>
-          <a href="univers.html#tapis" class="ucard-link" tabindex="0">
-            <div class="ucard-bg ucard-bg--tapis">
-              <img src="images/categories/tapis.jpg" alt="Tapis berbères" class="ucard-img">
-            </div>
-            <div class="ucard-shade"></div>
-            <div class="ucard-body">
-              <span class="ucard-eyebrow">Collection</span>
-              <h3 class="ucard-title">Tapis Berbères</h3>
-              <p class="ucard-desc">Azilal, Beni Ourain, Kilim&nbsp;— la mémoire tissée de l'Atlas.</p>
-              <span class="ucard-cta">Explorer <span class="arrow">→</span></span>
-            </div>
-          </a>
-        </article>
-
-        <!-- 4 small cards -->
-        <div class="ucard-side">
-
-          <article class="ucard" data-animate data-delay="80">
-            <a href="univers.html#poteries" class="ucard-link">
-              <div class="ucard-bg ucard-bg--poteries">
-                <img src="images/categories/poteries.jpg" alt="Jarres et poteries" class="ucard-img">
-              </div>
-              <div class="ucard-shade"></div>
-              <div class="ucard-body">
-                <span class="ucard-eyebrow">Collection</span>
-                <h3 class="ucard-title">Jarres & Poteries</h3>
-                <span class="ucard-cta">Explorer <span class="arrow">→</span></span>
-              </div>
-            </a>
-          </article>
-
-          <article class="ucard" data-animate data-delay="160">
-            <a href="univers.html#luminaires" class="ucard-link">
-              <div class="ucard-bg ucard-bg--luminaires">
-                <img src="images/categories/luminaires.jpg" alt="Luminaires artisanaux" class="ucard-img">
-              </div>
-              <div class="ucard-shade"></div>
-              <div class="ucard-body">
-                <span class="ucard-eyebrow">Collection</span>
-                <h3 class="ucard-title">Luminaires</h3>
-                <span class="ucard-cta">Explorer <span class="arrow">→</span></span>
-              </div>
-            </a>
-          </article>
-
-          <article class="ucard" data-animate data-delay="240">
-            <a href="univers.html#table" class="ucard-link">
-              <div class="ucard-bg ucard-bg--table">
-                <img src="images/categories/art-de-la-table.jpg" alt="Art de la table" class="ucard-img">
-              </div>
-              <div class="ucard-shade"></div>
-              <div class="ucard-body">
-                <span class="ucard-eyebrow">Collection</span>
-                <h3 class="ucard-title">Art de la Table</h3>
-                <span class="ucard-cta">Explorer <span class="arrow">→</span></span>
-              </div>
-            </a>
-          </article>
-
-          <article class="ucard" data-animate data-delay="320">
-            <a href="univers.html#deco" class="ucard-link">
-              <div class="ucard-bg ucard-bg--deco">
-                <img src="images/categories/decoration.jpg" alt="Décoration intérieure" class="ucard-img">
-              </div>
-              <div class="ucard-shade"></div>
-              <div class="ucard-body">
-                <span class="ucard-eyebrow">Collection</span>
-                <h3 class="ucard-title">Décoration</h3>
-                <span class="ucard-cta">Explorer <span class="arrow">→</span></span>
-              </div>
-            </a>
-          </article>
-
-          <article class="ucard" data-animate data-delay="400">
-            <a href="univers.html#textile" class="ucard-link">
-              <div class="ucard-bg ucard-bg--textile">
-                <img src="images/categories/textile.jpg" alt="Textile artisanal" class="ucard-img">
-              </div>
-              <div class="ucard-shade"></div>
-              <div class="ucard-body">
-                <span class="ucard-eyebrow">Collection</span>
-                <h3 class="ucard-title">Textile</h3>
-                <span class="ucard-cta">Explorer <span class="arrow">→</span></span>
-              </div>
-            </a>
-          </article>
-
-          <article class="ucard" data-animate data-delay="480">
-            <a href="univers.html#vannerie" class="ucard-link">
-              <div class="ucard-bg ucard-bg--vannerie">
-                <img src="images/categories/vannerie.jpg" alt="Vannerie artisanale" class="ucard-img">
-              </div>
-              <div class="ucard-shade"></div>
-              <div class="ucard-body">
-                <span class="ucard-eyebrow">Collection</span>
-                <h3 class="ucard-title">Vannerie</h3>
-                <span class="ucard-cta">Explorer <span class="arrow">→</span></span>
-              </div>
-            </a>
-          </article>
-
-        </div><!-- .ucard-side -->
-      </div><!-- .univers-grid -->
-    </section>
-
-
-    <!-- ══════════════════════════════════════
-         HISTOIRE TEASER
-         PHOTOS : images/story/histoire.jpg + images/story/detail.jpg
-    ══════════════════════════════════════ -->
-    <section class="story-section">
-      <div class="story-layout container">
-
-        <div class="story-visuals" data-animate>
-          <div class="story-main-img">
-            <div class="story-bg story-bg--main">
-              <img src="images/story/histoire.jpg" alt="Artisan berbère au travail" class="story-photo" data-site-img="histoire-chapitre1">
-            </div>
-          </div>
-          <div class="story-accent-img">
-            <div class="story-bg story-bg--detail">
-              <img src="images/story/detail.jpg" alt="Détail d'une pièce artisanale" class="story-photo" data-site-img="histoire-chapitre2">
-            </div>
-          </div>
-        </div>
-
-        <div class="story-text" data-animate data-delay="150">
-          <span class="eyebrow">Notre Histoire</span>
-          <h2 class="section-title">Nés d'une passion<br>pour le <em>beau geste</em></h2>
-          <div class="story-body">
-            <p>
-              Tout a commencé dans les montagnes de l'Atlas, à la rencontre de tisserands,
-              potiers et artisans qui perpétuent des savoir-faire millénaires avec une
-              élégance tranquille.
-            </p>
-            <p>
-              Chaque pièce de notre collection a été choisie pour sa qualité, son histoire
-              et la singularité qu'elle apporte à un intérieur contemporain. Ni musée,
-              ni folklorique — vivant, chaleureux, unique.
-            </p>
-          </div>
-          <a href="histoire.html" class="btn btn--dark">Découvrir notre histoire</a>
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ══════════════════════════════════════
-         SÉLECTION DU MOMENT
-         (injectée depuis data.js)
-    ══════════════════════════════════════ -->
-    <section class="featured-section">
-      <div class="container">
-
-        <div class="section-head section-head--center" data-animate>
-          <span class="eyebrow">Pièces choisies</span>
-          <h2 class="section-title">La Sélection du Moment</h2>
-          <p class="section-desc">Des objets d'exception, sélectionnés pour leur singularité.</p>
-        </div>
-
-        <div class="products-grid" id="featuredGrid">
-          <!-- Produits injectés par JS -->
-        </div>
-
-        <div class="section-foot" data-animate>
-          <a href="galerie.html" class="btn btn--outline">Voir toute la galerie</a>
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ══════════════════════════════════════
-         CITATION
-    ══════════════════════════════════════ -->
-    <section class="manifesto-section">
-      <div class="container">
-        <figure class="manifesto-quote" data-animate>
-          <blockquote>
-            <p>Chaque objet artisanal est un fragment de temps,<br>une forme de résistance à l'éphémère.</p>
-          </blockquote>
-          <figcaption>— L'esprit Odyssée Berbère</figcaption>
-        </figure>
-      </div>
-    </section>
-
-
-    <!-- ══════════════════════════════════════
-         BOUTIQUE CTA
-         PHOTO : images/boutique/boutique.jpg
-    ══════════════════════════════════════ -->
-    <section class="boutique-section">
-      <div class="boutique-bg">
-        <img src="images/boutique/boutique.jpg" alt="" class="boutique-img" aria-hidden="true" data-site-img="boutique-interieur">
-        <div class="boutique-overlay"></div>
-      </div>
-      <div class="container">
-        <div class="boutique-content" data-animate>
-          <span class="eyebrow eyebrow--light">Nous rendre visite</span>
-          <h2 class="section-title section-title--light">La boutique<br>vous attend</h2>
-          <p class="boutique-desc">
-            Venez toucher les matières, sentir les teintes, laisser les pièces
-            vous choisir. La boutique est ouverte du mardi au samedi.
-          </p>
-          <div class="boutique-actions">
-            <a href="contact.html" class="btn btn--primary">Horaires & Adresse</a>
-            <a href="#" class="btn btn--ghost-light" target="_blank" rel="noopener noreferrer">
-              Suivre sur Instagram
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-
-  <!-- ══════════════════════════════════════
-       FOOTER
-  ══════════════════════════════════════ -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-
-        <div class="footer-brand">
-          <a href="index.html" class="footer-logo">Odyssée Berbère</a>
-          <p class="footer-tag">Artisanat marocain &<br>décoration contemporaine.</p>
-          <div class="footer-socials">
-            <a href="https://www.instagram.com/odyssee_berbere" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-              </svg>
-            </a>
-            <a href="https://www.facebook.com/people/Odyssée-Berbère/61573462612331/?ref=NONE_xav_ig_profile_page_web" class="social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true">
-                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-heading">Navigation</h4>
-          <ul>
-            <li><a href="univers.html">Nos Univers</a></li>
-            <li><a href="histoire.html">Notre Histoire</a></li>
-            <li><a href="galerie.html">Galerie</a></li>
-            <li><a href="contact.html">Boutique & Contact</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-heading">Collections</h4>
-          <ul>
-            <li><a href="univers.html#tapis">Tapis Berbères</a></li>
-            <li><a href="univers.html#poteries">Jarres & Poteries</a></li>
-            <li><a href="univers.html#luminaires">Luminaires</a></li>
-            <li><a href="univers.html#table">Art de la Table</a></li>
-            <li><a href="univers.html#deco">Décoration</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-heading">Boutique</h4>
-          <address>
-            <p>48 Rue Molinier<br>47000 Agen</p>
-            <p><a href="tel:+33611317653">+33 6 11 31 76 53</a></p>
-            <p>Mar–Sam : 10h–19h<br>Mai à Septembre</p>
-          </address>
-        </div>
-
-      </div>
-
-      <div class="footer-bottom">
-        <p>&copy; 2025 Odyssée Berbère. Tous droits réservés.</p>
-        <p class="footer-credit">Artisanat fait main, sélectionné avec amour. &nbsp;·&nbsp; <a href="mentions-legales.html" style="color:inherit;text-decoration:underline">Mentions légales</a></p>
-      </div>
+      <a href="https://wa.me/33611317653?text=Bonjour%20Odyssée%20Berbère%2C%20je%20souhaite%20avoir%20des%20informations." class="btn-wa" target="_blank" rel="noopener noreferrer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.527 5.845L.057 23.43a.75.75 0 00.916.916l5.619-1.48A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.708 9.708 0 01-4.953-1.357l-.355-.21-3.676.967.984-3.592-.23-.37A9.71 9.71 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/>
+        </svg>
+        Nous contacter sur WhatsApp
+      </a>
     </div>
-  </footer>
 
-  <script src="js/data.js"></script>
-  <script src="js/sanity.js"></script>
-  <script src="js/main.js"></script>
+    <div class="boutique">
+      <p class="boutique-label">Notre boutique</p>
+      <address>
+        48 Rue Molinier, 47000 Agen<br>
+        <a href="tel:+33611317653">+33 6 11 31 76 53</a><br>
+        Mar–Sam · 10h–19h · Mai à Septembre
+      </address>
+    </div>
+
+  </div>
+
+  <p class="footer">© 2026 Odyssée Berbère</p>
+
 </body>
 </html>
