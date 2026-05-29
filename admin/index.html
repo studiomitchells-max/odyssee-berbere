@@ -2281,7 +2281,7 @@ async function uploadCategoriePic(input, slug, label, existingId) {
   if (!file) return
   toast('Upload en cours…')
   try {
-    const assetId = await sanityUpload(file)
+    const assetId = await uploadImage(file)
     const doc = {
       _type: 'categorie',
       label,
