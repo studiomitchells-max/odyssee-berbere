@@ -1327,18 +1327,55 @@ button {
     align-items: flex-start;
   }
 
-  /* Univers grid */
+  /* Univers grid — carrousel horizontal mobile */
+  .univers-section { overflow: hidden; }
+
   .univers-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 var(--container-px) 16px;
+    scrollbar-width: none;
+    cursor: grab;
   }
+  .univers-grid::-webkit-scrollbar { display: none; }
 
   .ucard-side {
-    grid-template-columns: 1fr;
+    display: contents;
+  }
+
+  .ucard, .ucard--large {
+    flex: 0 0 72vw;
+    max-width: 280px;
+    scroll-snap-align: start;
   }
 
   .ucard--large .ucard-link,
   .ucard .ucard-link {
-    min-height: 300px;
+    min-height: 320px;
+  }
+
+  /* Indicateur swipe */
+  .univers-swipe-hint {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--terracotta, #C06B3C);
+    padding: 0 var(--container-px);
+    margin-bottom: 12px;
+    animation: swipeAnim 1.8s ease-in-out infinite;
+  }
+  .univers-swipe-hint svg { flex-shrink: 0; }
+
+  @keyframes swipeAnim {
+    0%, 100% { transform: translateX(0); opacity: 1; }
+    50%       { transform: translateX(6px); opacity: 0.6; }
   }
 
   /* Products */
