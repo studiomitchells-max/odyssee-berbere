@@ -1372,3 +1372,17 @@ button {
   }
 }
 /* cache-bust */
+
+/* ── Hero image pages intérieures ── */
+.page-hero-bg { position: relative; overflow: hidden; }
+.page-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.page-hero-img.is-loaded { opacity: 1; }
+.page-hero-img[src=""] { display: none; }
