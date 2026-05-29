@@ -14,6 +14,21 @@ var SANITY_CONFIG = {
 };
 
 /* ──────────────────────────────────────────────────────
+   Construit l'URL depuis une ref brute  "image-xxx-800x600-jpg"
+   ────────────────────────────────────────────────────── */
+function imgRefToUrl(ref, w) {
+  if (!ref) return null;
+  var parts = ref.split('-');
+  if (parts.length < 4) return null;
+  var id   = parts[1];
+  var dims = parts[2];
+  var ext  = parts[3];
+  return 'https://cdn.sanity.io/images/iv3lqevt/production/'
+       + id + '-' + dims + '.' + ext
+       + (w ? ('?w=' + w + '&q=85&auto=format&fit=crop') : '');
+}
+
+/* ──────────────────────────────────────────────────────
    Construit l'URL d'une image hébergée sur Sanity CDN
    ────────────────────────────────────────────────────── */
 function sanityImageUrl(asset, width) {
@@ -197,6 +212,23 @@ if (SANITY_CONFIG.projectId === 'YOUR_PROJECT_ID') {
       window.SITE_PARAMS = parametres;
       appliquerParametres(parametres);
     }
+
+    /* ── Images statiques du site (histoire, hero…) ── */
+    sanityFetch('*[_type=="imageStatique"]{key,"imageRef":image.asset._ref}')
+      .then(function(imgs) {
+        (imgs || []).forEach(function(img) {
+          if (!img.key || !img.imageRef) return;
+          var url = imgRefToUrl(img.imageRef, 1600);
+          if (!url) return;
+          document.querySelectorAll('[data-site-img="' + img.key + '"]').forEach(function(el) {
+            el.src = url;
+            if (el.tagName === 'IMG') {
+              el.onload = function() { el.classList.add('is-loaded'); };
+            }
+          });
+        });
+      })
+      .catch(function() {});
 
     declencherPret();
   })
