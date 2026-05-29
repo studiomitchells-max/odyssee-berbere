@@ -79,20 +79,29 @@ if (SANITY_CONFIG.projectId === 'YOUR_PROJECT_ID') {
   // ← Configuré : on récupère les données depuis Sanity
   Promise.all([
 
+    /* Produits (avec imagesPrincipales et categorie en string) */
     sanityFetch(
-      '*[_type=="produit"] | order(ordre asc, _createdAt desc) {' +
-      '  _id, nom, origine, matiere, description, featured,' +
-      '  "categorie": categorie->slug.current,' +
-      '  image' +
+      '*[_type=="produit" && disponible != false] | order(ordre asc, _createdAt desc) {' +
+      '  _id, nom, origine, matiere, descriptionCourte, featured, categorie,' +
+      '  "image": imagesPrincipales[0]' +
       '}'
     ),
 
+    /* Photos de galerie */
+    sanityFetch(
+      '*[_type=="galerie" && visible != false] | order(ordre asc, _createdAt desc) {' +
+      '  _id, titre, categorie, description, image' +
+      '}'
+    ),
+
+    /* Catégories (schema optionnel) */
     sanityFetch(
       '*[_type=="categorie"] | order(ordre asc) {' +
       '  _id, label, "slug": slug.current, description, image' +
       '}'
     ),
 
+    /* Paramètres du site */
     sanityFetch(
       '*[_type=="parametres"][0] {' +
       '  nomBoutique, sousTitre, titrePrincipal, titreItalique,' +
@@ -104,30 +113,51 @@ if (SANITY_CONFIG.projectId === 'YOUR_PROJECT_ID') {
   ])
   .then(function(results) {
     var produits    = results[0] || [];
-    var categories  = results[1] || [];
-    var parametres  = results[2] || {};
+    var galerieItems = results[1] || [];
+    var categories  = results[2] || [];
+    var parametres  = results[3] || {};
 
-    /* Produits */
-    window.TOUS_PRODUITS = produits.map(function(p) {
+    /* Produits → format galerie */
+    var produitsFormates = produits.map(function(p) {
       return {
         id:        p._id,
-        nom:       p.nom       || 'Pièce artisanale',
-        origine:   p.origine   || 'Maroc',
-        matiere:   p.matiere   || 'Fait main',
-        categorie: p.categorie || 'deco',
+        nom:       p.nom             || 'Pièce artisanale',
+        origine:   p.origine         || 'Maroc',
+        matiere:   p.matiere         || 'Fait main',
+        categorie: p.categorie       || 'deco',
         image:     sanityImageUrl(p.image, 800),
         href:      'galerie.html',
         featured:  !!p.featured,
       };
     });
 
-    /* Sélection vedette : d'abord les "featured", sinon les 4 premiers */
-    var vedette = window.TOUS_PRODUITS.filter(function(p) { return p.featured; });
+    /* Photos de galerie → même format */
+    var galerieFormatees = galerieItems.map(function(g) {
+      /* Mapping des catégories galerie vers catégories produit */
+      var cat = g.categorie || 'deco';
+      var catMap = { boutique: 'deco', artisans: 'deco', produits: 'deco', voyage: 'deco', evenements: 'deco' };
+      return {
+        id:        g._id,
+        nom:       g.titre       || 'Photo',
+        origine:   '',
+        matiere:   g.description || '',
+        categorie: catMap[cat]   || cat,
+        image:     sanityImageUrl(g.image, 800),
+        href:      'galerie.html',
+        featured:  false,
+      };
+    });
+
+    /* Fusion : produits d'abord, puis galerie */
+    window.TOUS_PRODUITS = produitsFormates.concat(galerieFormatees);
+
+    /* Sélection vedette : featured ou 4 premiers */
+    var vedette = produitsFormates.filter(function(p) { return p.featured; });
     window.PRODUITS_VEDETTE = vedette.length > 0
       ? vedette.slice(0, 4)
-      : window.TOUS_PRODUITS.slice(0, 4);
+      : produitsFormates.slice(0, 4);
 
-    /* Catégories */
+    /* Catégories (si elles existent dans Sanity) */
     if (categories.length > 0) {
       window.UNIVERS = categories.map(function(c) {
         return {
