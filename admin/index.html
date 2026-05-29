@@ -1092,6 +1092,7 @@
 const PROJECT_ID  = 'iv3lqevt'
 const DATASET     = 'production'
 const API_VERSION = 'v2021-06-07'
+const DEFAULT_TOKEN = 'skc5JCkuF95VxvwAAaxmv2mdQgBk4Y4apeE8v2dFytV95D5sf43XzTq5zwu9T7EIG8BMNCYzUouFs0P1uTB6OM2agXF0VKyYvICJDtvn1SBYKM2s1xyKhuBkw7hVwOBGvZBIYDD9Ud2SeSgEBzzDgRjnixCBmuBdDJKgG5iPvZrXECfxtnpj'
 
 const API_BASE    = `https://${PROJECT_ID}.api.sanity.io/${API_VERSION}`
 const UPLOAD_URL  = `${API_BASE}/assets/images/${DATASET}`
@@ -1271,10 +1272,17 @@ async function loadSection(section) {
       renderPages(content)
     }
   } catch (err) {
+    const isCors = err.message.includes('fetch') || err.message.includes('network') || err.message.includes('Failed')
+    const msg = isCors
+      ? `Erreur CORS — Sanity bloque les requêtes depuis ce domaine.<br><br>
+         <a href="https://www.sanity.io/manage/personal/project/iv3lqevt/api" target="_blank" style="color:var(--terracotta);font-weight:600">
+         → Cliquez ici pour ouvrir Sanity → API → CORS Origins → Add CORS origin</a><br>
+         Ajoutez : <strong>https://studiomitchells-max.github.io</strong>`
+      : `${err.message}<br>Token peut-être révoqué — générez-en un nouveau sur manage.sanity.io`
     content.innerHTML = `<div class="empty-state">
       <div class="empty-icon">⚠️</div>
       <h3>Erreur de connexion</h3>
-      <p>${err.message}<br>Vérifiez votre token Sanity.</p>
+      <p style="line-height:1.8">${msg}</p>
     </div>`
   }
 }
@@ -2211,16 +2219,14 @@ function nanoid() {
 //  INIT
 // ─────────────────────────────────────────────────────────
 window.addEventListener('load', () => {
-  const saved = localStorage.getItem('ob_admin_token')
-  if (saved) {
-    TOKEN = saved
-    bootApp()
-  }
+  // Utilise le token sauvegardé, ou le token par défaut
+  TOKEN = localStorage.getItem('ob_admin_token') || DEFAULT_TOKEN
+  localStorage.setItem('ob_admin_token', TOKEN)
+  bootApp()
 
-  // Enter key on login
-  document.getElementById('token-input').addEventListener('keydown', e => {
-    if (e.key === 'Enter') handleLogin()
-  })
+  // Enter key on login (fallback si l'écran de login est visible)
+  const inp = document.getElementById('token-input')
+  if (inp) inp.addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin() })
 })
 </script>
 </body>
