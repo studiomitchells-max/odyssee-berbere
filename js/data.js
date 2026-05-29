@@ -39,6 +39,20 @@ var UNIVERS = [
     image: 'images/categories/decoration.jpg',
     href: 'univers.html#deco',
   },
+  {
+    id: 'textile',
+    label: 'Textile',
+    desc: 'Coussins brodés, jetés de canapé, plaids et tissus d\'exception.',
+    image: 'images/categories/textile.jpg',
+    href: 'univers.html#textile',
+  },
+  {
+    id: 'vannerie',
+    label: 'Vannerie',
+    desc: 'Paniers, corbeilles et objets tressés à la main par les artisanes.',
+    image: 'images/categories/vannerie.jpg',
+    href: 'univers.html#vannerie',
+  },
 ];
 
 var PRODUITS_VEDETTE = [
