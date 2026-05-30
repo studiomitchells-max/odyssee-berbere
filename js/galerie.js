@@ -58,7 +58,7 @@
     lb.querySelector('.lb-nom').textContent     = p.nom      || '';
     lb.querySelector('.lb-matiere').textContent = p.matiere  || '';
     var priceEl = lb.querySelector('.lb-price'); if(priceEl) priceEl.textContent = p.prix ? p.prix + ' €' : '';
-    var dimsEl = lb.querySelector('.lb-dimensions'); if(dimsEl) dimsEl.textContent = p.dimensions || '';
+    var dimsEl = lb.querySelector('.lb-dimensions'); if(dimsEl) { var dim = p.dimensions ? String(p.dimensions) : ''; dimsEl.textContent = dim ? (dim.toLowerCase().includes('cm') ? dim : dim + ' cm') : ''; }
     lb.classList.add('is-open');
     document.body.style.overflow = 'hidden';
   }
