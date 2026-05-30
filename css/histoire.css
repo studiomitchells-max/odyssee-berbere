@@ -85,6 +85,16 @@
   direction: ltr;
 }
 
+.histoire-split--full {
+  display: block;
+  max-width: 740px;
+  margin: 0 auto;
+}
+
+.histoire-split--full .histoire-split-text {
+  max-width: 100%;
+}
+
 .histoire-num {
   display: inline-block;
   font-family: var(--font-serif);
