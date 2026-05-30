@@ -377,7 +377,9 @@
       .whatsapp-label { display: none; }
       .whatsapp-float { bottom: 20px; right: 20px; }
     }
-  </style>
+    /* Masquer le FAB global — cette page a son propre bouton WhatsApp */
+  .whatsapp-fab { display: none !important; }
+</style>
 
   <script src="js/data.js"></script>
   <script src="js/sanity.js"></script>
