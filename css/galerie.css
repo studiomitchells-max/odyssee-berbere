@@ -242,3 +242,20 @@
   .lb-img { max-height: 55vh; }
   .lb-nom { font-size: 1.3rem; }
 }
+
+/* ── Prix produit ── */
+.pcard-price {
+  display: block;
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--c-terracotta);
+  margin-top: 4px;
+}
+
+.lb-price {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--c-terracotta);
+  margin-top: 8px;
+}
