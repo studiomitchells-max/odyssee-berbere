@@ -143,6 +143,7 @@ if (SANITY_CONFIG.projectId === 'YOUR_PROJECT_ID') {
         image:     sanityImageUrl(p.image, 800),
         href:      'galerie.html',
         featured:  !!p.featured,
+        prix:      p.prix || null,
       };
     });
 
