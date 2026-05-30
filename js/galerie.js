@@ -36,6 +36,7 @@
           '<h2 class="lb-nom"></h2>' +
           '<span class="lb-matiere"></span>' +
           '<span class="lb-price"></span>' +
+          '<span class="lb-dimensions"></span>' +
         '</div>' +
       '</div>';
     document.body.appendChild(lb);
@@ -56,6 +57,7 @@
     lb.querySelector('.lb-nom').textContent     = p.nom      || '';
     lb.querySelector('.lb-matiere').textContent = p.matiere  || '';
     var priceEl = lb.querySelector('.lb-price'); if(priceEl) priceEl.textContent = p.prix ? p.prix + ' €' : '';
+    var dimsEl = lb.querySelector('.lb-dimensions'); if(dimsEl) dimsEl.textContent = p.dimensions || '';
     lb.classList.add('is-open');
     document.body.style.overflow = 'hidden';
   }
