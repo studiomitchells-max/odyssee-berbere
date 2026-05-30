@@ -35,6 +35,7 @@
           '<span class="lb-origin"></span>' +
           '<h2 class="lb-nom"></h2>' +
           '<span class="lb-matiere"></span>' +
+          '<span class="lb-dimensions"></span>' +
           '<span class="lb-price"></span>' +
           '<span class="lb-dimensions"></span>' +
         '</div>' +
