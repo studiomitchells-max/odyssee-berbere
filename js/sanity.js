@@ -97,7 +97,7 @@ if (SANITY_CONFIG.projectId === 'YOUR_PROJECT_ID') {
     /* Produits (avec imagesPrincipales et categorie en string) */
     sanityFetch(
       '*[_type=="produit" && disponible != false] | order(ordre asc, _createdAt desc) {' +
-      '  _id, nom, origine, matiere, descriptionCourte, prix, featured, categorie,' +
+      '  _id, nom, origine, matiere, dimensions, descriptionCourte, prix, featured, categorie,' +
       '  "image": imagesPrincipales[0]' +
       '}'
     ),
@@ -144,6 +144,7 @@ if (SANITY_CONFIG.projectId === 'YOUR_PROJECT_ID') {
         href:      'galerie.html',
         featured:  !!p.featured,
         prix:      p.prix || null,
+        dimensions: p.dimensions || null,
       };
     });
 
