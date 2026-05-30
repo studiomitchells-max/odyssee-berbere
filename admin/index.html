@@ -1193,7 +1193,7 @@ async function uploadImage(file) {
 
 function sanityImgUrl(ref, w = 400) {
   if (!ref) return null
-  const id = ref.replace('image-', '').replace(/-([a-z]+)$/, '.$1').replace(/-/g, '/')
+  const id = ref.replace('image-', '').replace(/-([a-zA-Z0-9]+)$/, '.$1')
   return `${IMG_BASE}/${id}?w=${w}&auto=format`
 }
 
