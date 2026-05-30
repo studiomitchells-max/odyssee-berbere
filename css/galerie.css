@@ -259,3 +259,12 @@
   color: var(--c-terracotta);
   margin-top: 8px;
 }
+
+/* ── Dimensions lightbox ── */
+.lb-dimensions {
+  display: block;
+  font-size: .8rem;
+  color: var(--c-muted);
+  letter-spacing: .5px;
+  margin-top: 4px;
+}
