@@ -35,6 +35,7 @@
           '<span class="lb-origin"></span>' +
           '<h2 class="lb-nom"></h2>' +
           '<span class="lb-matiere"></span>' +
+          '<span class="lb-price"></span>' +
         '</div>' +
       '</div>';
     document.body.appendChild(lb);
@@ -54,6 +55,7 @@
     lb.querySelector('.lb-origin').textContent  = p.origine  || '';
     lb.querySelector('.lb-nom').textContent     = p.nom      || '';
     lb.querySelector('.lb-matiere').textContent = p.matiere  || '';
+    var priceEl = lb.querySelector('.lb-price'); if(priceEl) priceEl.textContent = p.prix ? p.prix + ' €' : '';
     lb.classList.add('is-open');
     document.body.style.overflow = 'hidden';
   }
@@ -76,6 +78,7 @@
           '<span class="pcard-origin">' + (p.origine||'') + '</span>' +
           '<h3 class="pcard-name">' + p.nom + '</h3>' +
           '<span class="pcard-material">' + (p.matiere||'') + '</span>' +
+          (p.prix ? '<span class="pcard-price">' + p.prix + ' €</span>' : '') +
         '</div>' +
       '</div>' +
     '</article>';
