@@ -22,8 +22,8 @@
   --c-cream:         #F8F4EF;
 
   /* Typographies */
-  --font-serif: 'Gloock', Georgia, 'Times New Roman', serif;
-  --font-sans:  'Outfit', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans:  'DM Sans', system-ui, -apple-system, sans-serif;
 
   /* Espacements */
   --sp-xs:  0.5rem;
@@ -542,24 +542,31 @@ button {
 /* Scroll indicator */
 .hero-scroll {
   position: absolute;
-  bottom: 2.5rem;
-  right: var(--container-px);
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  color: rgba(255,255,255,0.5);
-  font-size: 0.68rem;
-  letter-spacing: 0.18em;
+  gap: 8px;
+  color: rgba(255,255,255,0.55);
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  z-index: 1;
+  z-index: 2;
+  opacity: 0;
+  animation: heroScrollFadeIn 1s ease 1.8s forwards;
 }
 
 .scroll-bar {
   width: 1px;
-  height: 48px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+  height: 40px;
+  background: linear-gradient(to bottom, var(--c-terracotta, #C17A5B), transparent);
   animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes heroScrollFadeIn {
+  to { opacity: 1; }
 }
 
 @keyframes scrollPulse {
@@ -1423,61 +1430,3 @@ button {
 }
 .page-hero-img.is-loaded { opacity: 1; }
 .page-hero-img[src=""] { display: none; }
-
-/* ── WhatsApp FAB ── */
-.whatsapp-fab {
-  position: fixed;
-  bottom: 28px;
-  right: 28px;
-  z-index: 9000;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: #25D366;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 20px rgba(37,211,102,.45);
-  transition: transform .2s ease, box-shadow .2s ease;
-  text-decoration: none;
-}
-.whatsapp-fab:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 28px rgba(37,211,102,.55);
-}
-
-/* ── Bandeau réassurance ── */
-.reassurance-bar {
-  background: var(--c-dark);
-  color: rgba(255,255,255,.7);
-  font-size: .72rem;
-  letter-spacing: 1.8px;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 9px 16px;
-}
-.reassurance-inner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.rea-sep { opacity: .35; }
-
-@media (max-width: 480px) {
-  .rea-sep:nth-child(6),
-  .rea-sep:nth-child(6) + span { display: none; }
-  .whatsapp-fab { bottom: 20px; right: 20px; width: 50px; height: 50px; }
-}
-
-/* Histoire — split pleine largeur (sans image) */
-.histoire-split--full {
-  display: block;
-  max-width: 720px;
-  margin: 0 auto;
-}
-.histoire-split--full .histoire-split-text {
-  max-width: 100%;
-}
