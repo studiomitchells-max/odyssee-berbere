@@ -1344,7 +1344,7 @@ function renderProduits(container) {
             ${imgUrl ? `<img src="${imgUrl}" alt="${escHtml(p.nom)}" loading="lazy" />` : '<div class="no-img">🪬</div>'}
             <div class="item-card-badges">
               ${p.disponible===false ? '<span class=\"item-badge item-badge--red\">✕ Indisponible</span>' : '<span class=\"item-badge item-badge--green\">✓ Disponible</span>'}
-              ${p.featured ? '<span class=\"item-badge item-badge--gold\">★ Vedette</span>' : ''}
+              ${p.enVedette ? '<span class=\"item-badge item-badge--gold\">★ Vedette</span>' : ''}
             </div>
           </div>
           <div class="item-card-body">
