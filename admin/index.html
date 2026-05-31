@@ -714,6 +714,15 @@
       box-shadow: 0 1px 4px rgba(0,0,0,0.2);
     }
 
+    /* Toggle disponible → vert quand ON */
+    .toggle-input[name="disponible"]:checked + .toggle-track { background: #27AE60; }
+    /* Toggle enVedette → or quand ON */
+    .toggle-input[name="enVedette"]:checked + .toggle-track { background: #D4A853; }
+    /* Toggle visible → vert quand ON */
+    .toggle-input[name="visible"]:checked + .toggle-track { background: #27AE60; }
+    /* Toggle actif → vert quand ON */
+    .toggle-input[name="actif"]:checked + .toggle-track { background: #27AE60; }
+    /* Fallback générique */
     .toggle-input:checked + .toggle-track { background: var(--terracotta); }
 
     .toggle-input:checked + .toggle-track::after { transform: translateX(18px); }
