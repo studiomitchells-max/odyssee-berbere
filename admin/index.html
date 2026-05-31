@@ -1342,7 +1342,7 @@ function renderProduits(container) {
         <div class="item-card" data-id="${p._id}" data-nom="${escHtml(p.nom)}" data-cat="${p.categorie||''}">
           <div class="item-card-img">
             ${imgUrl ? `<img src="${imgUrl}" alt="${escHtml(p.nom)}" loading="lazy" />` : '<div class="no-img">🪬</div>'}
-            <span class="item-card-badges">
+            <div class="item-card-badges">
               ${p.disponible===false ? '<span class=\"item-badge item-badge--red\">✕ Indisponible</span>' : '<span class=\"item-badge item-badge--green\">✓ Disponible</span>'}
               ${p.featured ? '<span class=\"item-badge item-badge--gold\">★ Vedette</span>' : ''}
             </div>
