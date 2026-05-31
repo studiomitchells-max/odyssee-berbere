@@ -976,7 +976,17 @@
       .items-grid { grid-template-columns: 1fr 1fr; }
       .form-row { grid-template-columns: 1fr; }
     }
-  </style>
+  
+    /* ── Badges produit ── */
+    .item-card-badges { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 4px; }
+    .item-badge {
+      font-size: 10px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase;
+      padding: 2px 7px; border-radius: 20px;
+    }
+    .item-badge--green  { background: #d4edda; color: #1a6b32; }
+    .item-badge--red    { background: #f8d7da; color: #842029; }
+    .item-badge--gold   { background: #fff3cd; color: #856404; }
+</style>
 </head>
 <body>
 
