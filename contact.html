@@ -132,7 +132,7 @@
                       <span>Dimanche – Lundi</span>
                       <span>Fermé</span>
                     </div>
-                    <div class="horaire-status horaire-open">● Boutique ouverte actuellement</div>
+                    <div class="horaire-status" id="boutique-status"></div>
                   </div>
                 </div>
               </div>
@@ -386,5 +386,31 @@
   <script src="js/main.js"></script>
   <script src="js/contact.js"></script>
 
+
+  <script>
+    (function() {
+      var el = document.getElementById('boutique-status');
+      if (!el) return;
+      var now = new Date();
+      var day = now.getDay(); // 0=dim, 1=lun, 2=mar ... 6=sam
+      var hour = now.getHours() + now.getMinutes() / 60;
+      // Ouvert : mardi(2) à samedi(6), 10h-19h
+      var isOpen = day >= 2 && day <= 6 && hour >= 10 && hour < 19;
+      if (isOpen) {
+        el.innerHTML = '● Boutique ouverte actuellement';
+        el.className = 'horaire-status horaire-open';
+      } else {
+        var jours = ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
+        if (day === 0 || day === 1) {
+          el.innerHTML = '● Fermé aujourd'hui (' + jours[day] + ')';
+        } else if (hour < 10) {
+          el.innerHTML = '● Ouvre à 10h aujourd'hui';
+        } else {
+          el.innerHTML = '● Fermé — ouvre demain à 10h';
+        }
+        el.className = 'horaire-status horaire-closed';
+      }
+    })();
+  </script>
 </body>
 </html>
