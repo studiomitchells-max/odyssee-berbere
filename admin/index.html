@@ -1014,10 +1014,7 @@
         <span class="icon">🪬</span> Produits
         <span class="badge" id="badge-produits">—</span>
       </a>
-      <a class="nav-item" onclick="navigate('galerie')" href="#">
-        <span class="icon">🖼️</span> Galerie
-        <span class="badge" id="badge-galerie">—</span>
-      </a>
+
       <a class="nav-item" onclick="navigate('temoignages')" href="#">
         <span class="icon">⭐</span> Témoignages
         <span class="badge" id="badge-temoignages">—</span>
@@ -1216,7 +1213,7 @@ async function refreshBadges() {
       "pages": count(*[_type == "pageContenu"])
     }`)
     document.getElementById('badge-produits').textContent = counts.produits ?? 0
-    document.getElementById('badge-galerie').textContent  = counts.galerie  ?? 0
+    
     document.getElementById('badge-temoignages').textContent = counts.temoignages ?? 0
     document.getElementById('badge-pages').textContent    = counts.pages    ?? 0
   } catch {}
@@ -1260,12 +1257,7 @@ async function loadSection(section) {
         "image": imagesPrincipales[0].asset._ref
       }`)
       renderProduits(content)
-    } else if (section === 'galerie') {
-      currentData = await sanityQuery(`*[_type == "galerie"] | order(ordre asc, _createdAt desc) {
-        _id, titre, categorie, description, ordre, visible,
-        "imageRef": image.asset._ref
-      }`)
-      renderGalerie(content)
+
     } else if (section === 'temoignages') {
       currentData = await sanityQuery(`*[_type == "temoignage"] | order(_createdAt desc) {
         _id, auteur, ville, texte, note, produitAchete, dateAchat, visible, enVedette,
