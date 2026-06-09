@@ -1,29 +1,30 @@
 /* ============================================================
-   MAISON BERBÈRE — Feuille de styles principale
+   ODYSSÉE BERBÈRE — Thème Sombre (Noir + Blanc + Terracotta)
+   Remplacer css/style.css par ce fichier
    ============================================================ */
 
 
 /* ============================================================
-   1. TOKENS DE DESIGN (variables CSS)
+   1. TOKENS DE DESIGN — THÈME SOMBRE
    ============================================================ */
 :root {
-  /* Palette */
-  --c-bg:            #FAF8F5;
-  --c-surface:       #F2EDE4;
-  --c-sand:          #E6D9C9;
-  --c-terracotta:    #B86848;
-  --c-terracotta-dk: #8B4A30;
-  --c-earth:         #6B4A3A;
-  --c-dark:          #18100A;
-  --c-text:          #2C1F16;
-  --c-muted:         #8A7469;
-  --c-gold:          #AC8A5C;
+  /* Palette sombre */
+  --c-bg:            #0C0806;       /* noir chaud profond */
+  --c-surface:       #14100A;       /* surface légèrement plus claire */
+  --c-sand:          rgba(180,120,70,0.18); /* séparateurs chauds discrets */
+  --c-terracotta:    #C87050;       /* terracotta légèrement lumineux */
+  --c-terracotta-dk: #A05030;
+  --c-earth:         #8A6040;
+  --c-dark:          #060402;       /* footer ultra-sombre */
+  --c-text:          #EDE8E0;       /* blanc chaud */
+  --c-muted:         #9A8878;       /* texte secondaire */
+  --c-gold:          #C09050;
   --c-white:         #FFFFFF;
-  --c-cream:         #F8F4EF;
+  --c-cream:         #130E08;       /* surface "cream" → sombre */
 
   /* Typographies */
   --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --font-sans:  'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-sans:  'Outfit', system-ui, -apple-system, sans-serif;
 
   /* Espacements */
   --sp-xs:  0.5rem;
@@ -108,7 +109,6 @@ button {
   padding-inline: var(--container-px);
 }
 
-/* Eyebrow label */
 .eyebrow {
   display: inline-block;
   font-family: var(--font-sans);
@@ -121,10 +121,9 @@ button {
 }
 
 .eyebrow--light {
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.65);
 }
 
-/* Section header */
 .section-head {
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
@@ -204,47 +203,47 @@ button {
 .btn--primary:hover {
   background: var(--c-terracotta-dk);
   border-color: var(--c-terracotta-dk);
-  box-shadow: 0 8px 24px rgba(184, 104, 72, 0.35);
+  box-shadow: 0 8px 24px rgba(200, 112, 80, 0.35);
 }
 
-/* Ghost (outline white, for hero) */
+/* Ghost (outline white, pour hero) */
 .btn--ghost {
-  background: transparent;
-  color: var(--c-white);
-  border: 1.5px solid rgba(255,255,255,0.55);
-}
-.btn--ghost:hover {
-  background: rgba(255,255,255,0.12);
-  border-color: rgba(255,255,255,0.85);
-}
-
-/* Ghost light (for dark sections) */
-.btn--ghost-light {
   background: transparent;
   color: var(--c-white);
   border: 1.5px solid rgba(255,255,255,0.45);
 }
-.btn--ghost-light:hover {
+.btn--ghost:hover {
   background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.8);
+}
+
+/* Ghost light */
+.btn--ghost-light {
+  background: transparent;
+  color: var(--c-white);
+  border: 1.5px solid rgba(255,255,255,0.38);
+}
+.btn--ghost-light:hover {
+  background: rgba(255,255,255,0.09);
   border-color: var(--c-white);
 }
 
-/* Dark outline */
+/* Outline sur fond sombre */
 .btn--outline {
   background: transparent;
   color: var(--c-text);
-  border: 1.5px solid var(--c-sand);
+  border: 1.5px solid rgba(180,120,70,0.3);
 }
 .btn--outline:hover {
   border-color: var(--c-terracotta);
   color: var(--c-terracotta);
 }
 
-/* Dark filled */
+/* Dark filled → sur fond sombre devient blanc chaud */
 .btn--dark {
-  background: var(--c-text);
+  background: var(--c-terracotta);
   color: var(--c-white);
-  border: 1.5px solid var(--c-text);
+  border: 1.5px solid var(--c-terracotta);
 }
 .btn--dark:hover {
   background: var(--c-terracotta-dk);
@@ -265,12 +264,12 @@ button {
 }
 .site-header.is-top .btn-visit {
   color: rgba(255,255,255,0.85);
-  border-color: rgba(255,255,255,0.45);
+  border-color: rgba(255,255,255,0.38);
 }
 .site-header.is-top .btn-visit:hover {
   color: var(--c-white);
   border-color: var(--c-white);
-  background: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.1);
 }
 .site-header:not(.is-top) .btn-visit {
   color: var(--c-terracotta);
@@ -301,15 +300,15 @@ button {
 /* Transparent over hero */
 .site-header.is-top {
   background: transparent;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-/* Solid on scroll */
+/* Sombre au scroll — plus de fond blanc */
 .site-header:not(.is-top) {
-  background: rgba(250, 248, 245, 0.97);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 1px 0 var(--c-sand);
+  background: rgba(10, 7, 4, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(180,120,70,0.12);
 }
 
 .nav-inner {
@@ -385,7 +384,7 @@ button {
 .nav-link:hover::after,
 .nav-link.is-active::after { width: 100%; }
 
-.site-header.is-top .nav-link { color: rgba(255,255,255,0.8); }
+.site-header.is-top .nav-link { color: rgba(255,255,255,0.75); }
 .site-header.is-top .nav-link:hover { color: var(--c-white); }
 .site-header:not(.is-top) .nav-link { color: var(--c-muted); }
 .site-header:not(.is-top) .nav-link:hover { color: var(--c-text); }
@@ -416,7 +415,6 @@ button {
 .site-header.is-top .nav-burger { color: var(--c-white); }
 .site-header:not(.is-top) .nav-burger { color: var(--c-text); }
 
-/* Burger open state */
 .nav-burger[aria-expanded="true"] span:nth-child(1) {
   transform: translateY(6.5px) rotate(45deg);
 }
@@ -440,21 +438,19 @@ button {
   overflow: hidden;
 }
 
-/* Background image / gradient fallback */
 .hero-bg {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     145deg,
-    #2A1810 0%,
-    #5C3022 30%,
-    #8B4C34 60%,
-    #C47858 85%,
-    #D4956C 100%
+    #180C05 0%,
+    #3C1A0A 30%,
+    #6A2E12 60%,
+    #8A4020 85%,
+    #A05030 100%
   );
 }
 
-/* Vidéo hero */
 .hero-video {
   position: absolute;
   inset: 0;
@@ -463,12 +459,10 @@ button {
   object-fit: cover;
   opacity: 0;
   transition: opacity 1.4s var(--ease);
-  /* Désactivée sur mobile pour économiser les données */
 }
 
 .hero-video.is-loaded { opacity: 1; }
 
-/* Sur mobile : on cache la vidéo, l'image prend le relais */
 @media (max-width: 640px) {
   .hero-video { display: none; }
 }
@@ -484,21 +478,18 @@ button {
 }
 
 .hero-img.is-loaded { opacity: 1; }
-
-/* Quand la vidéo est active, l'image reste en dessous (fallback silencieux) */
 .hero-video.is-loaded ~ .hero-img { opacity: 0 !important; }
 
-/* Overlay: vignette bottom */
 .hero-overlay {
   position: absolute;
   inset: 0;
   background:
     linear-gradient(
       to bottom,
-      rgba(20, 10, 5, 0.35) 0%,
-      rgba(20, 10, 5, 0.10) 40%,
-      rgba(20, 10, 5, 0.55) 80%,
-      rgba(20, 10, 5, 0.75) 100%
+      rgba(8, 4, 2, 0.50) 0%,
+      rgba(8, 4, 2, 0.15) 40%,
+      rgba(8, 4, 2, 0.65) 80%,
+      rgba(8, 4, 2, 0.82) 100%
     );
 }
 
@@ -523,12 +514,12 @@ button {
 
 .hero-title em {
   font-style: italic;
-  color: rgba(255, 218, 185, 0.92);
+  color: rgba(255, 210, 170, 0.92);
 }
 
 .hero-sub {
   font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-  color: rgba(255,255,255,0.75);
+  color: rgba(255,255,255,0.7);
   line-height: 1.8;
   margin-bottom: 2.5rem;
 }
@@ -539,7 +530,6 @@ button {
   gap: 1rem;
 }
 
-/* Scroll indicator */
 .hero-scroll {
   position: absolute;
   bottom: 2rem;
@@ -549,7 +539,7 @@ button {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.45);
   font-size: 0.58rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -561,7 +551,7 @@ button {
 .scroll-bar {
   width: 1px;
   height: 40px;
-  background: linear-gradient(to bottom, var(--c-terracotta, #C17A5B), transparent);
+  background: linear-gradient(to bottom, var(--c-terracotta), transparent);
   animation: scrollPulse 2s ease-in-out infinite;
 }
 
@@ -580,7 +570,7 @@ button {
    7. PILLARS
    ============================================================ */
 .pillars {
-  background: var(--c-cream);
+  background: var(--c-surface);
   padding: clamp(3rem, 6vw, 5rem) 0;
   border-bottom: 1px solid var(--c-sand);
 }
@@ -610,7 +600,7 @@ button {
   font-size: 0.75rem;
   letter-spacing: 0.3em;
   margin-bottom: 1rem;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .pillar h3 {
@@ -631,14 +621,13 @@ button {
 
 
 /* ============================================================
-   8. NOS UNIVERS — GRILLE DE CARTES
+   8. NOS UNIVERS
    ============================================================ */
 .univers-section {
   padding: clamp(4rem, 8vw, 7rem) 0;
   background: var(--c-bg);
 }
 
-/* Grid: 1 large card + 2×2 small */
 .univers-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -652,7 +641,6 @@ button {
   gap: 1rem;
 }
 
-/* Base card */
 .ucard {
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -668,12 +656,10 @@ button {
   cursor: pointer;
 }
 
-/* Large card height */
 .ucard--large .ucard-link {
   min-height: 580px;
 }
 
-/* Image background (gradient fallback) */
 .ucard-bg {
   position: absolute;
   inset: 0;
@@ -684,7 +670,6 @@ button {
   transform: scale(1.05);
 }
 
-/* Gradient fallbacks */
 .ucard-bg--tapis {
   background: linear-gradient(155deg, #3D2218 0%, #7A3D26 40%, #C4705A 75%, #D49070 100%);
 }
@@ -719,24 +704,22 @@ button {
 
 .ucard-img.is-loaded { opacity: 1; }
 
-/* Shade overlay */
 .ucard-shade {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(15, 8, 3, 0.82) 0%,
-    rgba(15, 8, 3, 0.2) 50%,
+    rgba(8, 4, 2, 0.88) 0%,
+    rgba(8, 4, 2, 0.22) 50%,
     transparent 100%
   );
   transition: opacity var(--t2) var(--ease);
 }
 
 .ucard-link:hover .ucard-shade {
-  opacity: 0.85;
+  opacity: 0.88;
 }
 
-/* Card text */
 .ucard-body {
   position: absolute;
   bottom: 0;
@@ -751,7 +734,7 @@ button {
   font-size: 0.65rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.55);
   margin-bottom: 0.4rem;
 }
 
@@ -765,7 +748,7 @@ button {
 
 .ucard-desc {
   font-size: 0.85rem;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.65);
   line-height: 1.6;
   margin-bottom: 1rem;
   max-width: 320px;
@@ -779,7 +762,7 @@ button {
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.65);
+  color: rgba(255,255,255,0.6);
   transition: color var(--t2) var(--ease), gap var(--t2) var(--ease);
 }
 
@@ -810,7 +793,6 @@ button {
   align-items: center;
 }
 
-/* Visuals: stacked images with offset */
 .story-visuals {
   position: relative;
 }
@@ -853,11 +835,10 @@ button {
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 4px solid var(--c-bg);
-  box-shadow: 0 12px 40px rgba(30, 15, 8, 0.18);
+  border: 4px solid var(--c-cream);
+  box-shadow: 0 12px 40px rgba(5, 3, 1, 0.5);
 }
 
-/* Story text */
 .story-text .section-title {
   margin-bottom: 1.75rem;
 }
@@ -891,7 +872,6 @@ button {
   gap: 1.25rem;
 }
 
-/* Product card */
 .product-card {
   cursor: pointer;
 }
@@ -903,11 +883,10 @@ button {
   aspect-ratio: 3 / 4;
   overflow: hidden;
   border-radius: var(--radius-lg);
-  background: var(--c-sand);
+  background: var(--c-surface);
   margin-bottom: 1.1rem;
 }
 
-/* Each product bg gradient (by category) */
 .pcard-bg {
   position: absolute;
   inset: 0;
@@ -937,11 +916,10 @@ button {
 .pcard-photo.is-loaded { opacity: 1; }
 .product-card:hover .pcard-photo { transform: scale(1.04); }
 
-/* Hover reveal overlay */
 .pcard-hover {
   position: absolute;
   inset: 0;
-  background: rgba(20, 10, 5, 0.0);
+  background: rgba(8, 4, 2, 0.0);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -949,7 +927,7 @@ button {
 }
 
 .product-card:hover .pcard-hover {
-  background: rgba(20, 10, 5, 0.25);
+  background: rgba(8, 4, 2, 0.28);
 }
 
 .pcard-view {
@@ -959,7 +937,7 @@ button {
   text-transform: uppercase;
   color: var(--c-white);
   padding: 0.6rem 1.2rem;
-  border: 1px solid rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.65);
   border-radius: var(--radius);
   opacity: 0;
   transform: translateY(8px);
@@ -970,9 +948,6 @@ button {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* Product info */
-.pcard-info {}
 
 .pcard-origin {
   display: block;
@@ -1064,7 +1039,7 @@ button {
 .boutique-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(20, 8, 2, 0.68);
+  background: rgba(8, 3, 1, 0.72);
 }
 
 .boutique-section .container {
@@ -1083,7 +1058,7 @@ button {
 
 .boutique-desc {
   font-size: 1rem;
-  color: rgba(255,255,255,0.68);
+  color: rgba(255,255,255,0.62);
   line-height: 1.8;
   margin-bottom: 2.5rem;
 }
@@ -1100,8 +1075,9 @@ button {
    ============================================================ */
 .site-footer {
   background: var(--c-dark);
-  color: rgba(255,255,255,0.65);
+  color: rgba(255,255,255,0.55);
   padding: clamp(3.5rem, 7vw, 6rem) 0 2rem;
+  border-top: 1px solid var(--c-sand);
 }
 
 .footer-grid {
@@ -1109,7 +1085,7 @@ button {
   grid-template-columns: 1.4fr 1fr 1fr 1fr;
   gap: 3rem;
   padding-bottom: 3rem;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
 .footer-logo {
@@ -1125,7 +1101,7 @@ button {
 .footer-tag {
   font-size: 0.82rem;
   line-height: 1.75;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.38);
   margin-bottom: 1.5rem;
 }
 
@@ -1140,9 +1116,9 @@ button {
   justify-content: center;
   width: 36px;
   height: 36px;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.12);
   border-radius: 50%;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.42);
   transition: all var(--t2) var(--ease);
 }
 
@@ -1156,7 +1132,7 @@ button {
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.28);
   margin-bottom: 1.25rem;
 }
 
@@ -1169,12 +1145,12 @@ button {
 .footer-col a,
 .footer-col address p {
   font-size: 0.88rem;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.45);
   line-height: 1.6;
   transition: color var(--t2) var(--ease);
 }
 
-.footer-col a:hover { color: var(--c-white); }
+.footer-col a:hover { color: var(--c-terracotta); }
 
 .footer-col address p { margin-bottom: 0.5rem; }
 .footer-col address a { font-size: 0.88rem; }
@@ -1189,7 +1165,7 @@ button {
 
 .footer-bottom p {
   font-size: 0.75rem;
-  color: rgba(255,255,255,0.28);
+  color: rgba(255,255,255,0.22);
   letter-spacing: 0.04em;
 }
 
@@ -1198,9 +1174,52 @@ button {
   font-size: 0.72rem !important;
 }
 
+/* WhatsApp FAB */
+.whatsapp-fab {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 200;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+  transition: transform var(--t2) var(--ease), box-shadow var(--t2) var(--ease);
+}
+.whatsapp-fab:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 28px rgba(37,211,102,0.45);
+}
+
+/* Bandeau réassurance */
+.reassurance-bar {
+  background: rgba(200,112,80,0.08);
+  border-top: 1px solid rgba(200,112,80,0.14);
+  border-bottom: 1px solid rgba(200,112,80,0.08);
+}
+.reassurance-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  padding: 0.5rem var(--container-px);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-terracotta);
+  opacity: 0.75;
+}
+.rea-sep { opacity: 0.4; }
+
 
 /* ============================================================
-   14. ANIMATIONS (Intersection Observer)
+   14. ANIMATIONS
    ============================================================ */
 [data-animate] {
   opacity: 0;
@@ -1215,20 +1234,20 @@ button {
   transform: translateY(0);
 }
 
-/* Staggered delays */
 [data-delay="80"]  { transition-delay: 80ms; }
 [data-delay="120"] { transition-delay: 120ms; }
 [data-delay="150"] { transition-delay: 150ms; }
 [data-delay="160"] { transition-delay: 160ms; }
 [data-delay="240"] { transition-delay: 240ms; }
 [data-delay="320"] { transition-delay: 320ms; }
+[data-delay="400"] { transition-delay: 400ms; }
+[data-delay="480"] { transition-delay: 480ms; }
 
 
 /* ============================================================
    15. RESPONSIVE
    ============================================================ */
 
-/* Tablet ≤ 1024px */
 @media (max-width: 1024px) {
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1245,7 +1264,6 @@ button {
   }
 }
 
-/* Tablet ≤ 860px */
 @media (max-width: 860px) {
   .univers-grid {
     grid-template-columns: 1fr;
@@ -1281,19 +1299,18 @@ button {
   }
 }
 
-/* Mobile ≤ 640px */
 @media (max-width: 640px) {
   :root { --nav-h: 68px; }
 
-  /* Nav */
+  /* Nav mobile — fond sombre */
   .nav-links {
     position: fixed;
     top: var(--nav-h);
     left: 0;
     right: 0;
-    background: rgba(250, 248, 245, 0.98);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(10, 7, 4, 0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     flex-direction: column;
     gap: 0;
     padding: 1rem 0 1.5rem;
@@ -1319,12 +1336,9 @@ button {
   }
 
   .nav-link::after { display: none; }
-
   .nav-burger { display: flex; }
-
   .btn-visit { display: none; }
 
-  /* Hero */
   .hero-title {
     font-size: clamp(2.4rem, 10vw, 3.5rem);
   }
@@ -1334,7 +1348,7 @@ button {
     align-items: flex-start;
   }
 
-  /* Univers grid — carrousel horizontal mobile */
+  /* Univers carrousel horizontal */
   .univers-section { overflow: hidden; }
 
   .univers-grid {
@@ -1350,9 +1364,7 @@ button {
   }
   .univers-grid::-webkit-scrollbar { display: none; }
 
-  .ucard-side {
-    display: contents;
-  }
+  .ucard-side { display: contents; }
 
   .ucard, .ucard--large {
     flex: 0 0 72vw;
@@ -1365,7 +1377,6 @@ button {
     min-height: 320px;
   }
 
-  /* Indicateur swipe */
   .univers-swipe-hint {
     display: flex;
     align-items: center;
@@ -1373,7 +1384,7 @@ button {
     font-size: 11px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: var(--terracotta, #C06B3C);
+    color: var(--c-terracotta);
     padding: 0 var(--container-px);
     margin-bottom: 12px;
     animation: swipeAnim 1.8s ease-in-out infinite;
@@ -1385,13 +1396,11 @@ button {
     50%       { transform: translateX(6px); opacity: 0.6; }
   }
 
-  /* Products */
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
 
-  /* Footer */
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -1404,7 +1413,6 @@ button {
   }
 }
 
-/* Mobile ≤ 400px */
 @media (max-width: 400px) {
   .products-grid {
     grid-template-columns: 1fr;
@@ -1415,7 +1423,6 @@ button {
     justify-content: center;
   }
 }
-/* cache-bust */
 
 /* ── Hero image pages intérieures ── */
 .page-hero-bg { position: relative; overflow: hidden; }
