@@ -1442,15 +1442,6 @@ button {
 /* ============================================================
    SECTION ARTISANS
    ============================================================ */
-/* ── Artisans – filmstrip éditorial ──────────── */
-.artisans-section {
-  padding: clamp(4rem, 8vw, 7rem) 0 0;
-  background: var(--c-bg);
-  overflow: hidden;
-}
-.artisans-section .section-head {
-  margin-bottom: clamp(2rem, 4vw, 3.5rem);
-}
 
 /* ── Filmstrip ── */
 .artisans-filmstrip {
