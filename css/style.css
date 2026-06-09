@@ -1442,124 +1442,129 @@ button {
 /* ============================================================
    SECTION ARTISANS
    ============================================================ */
-/* ── Artisans ─────────────────────────────── */
+/* ── Artisans – filmstrip éditorial ──────────── */
 .artisans-section {
-  padding: clamp(4rem, 8vw, 7rem) 0;
+  padding: clamp(4rem, 8vw, 7rem) 0 0;
   background: var(--c-bg);
   overflow: hidden;
 }
 .artisans-section .section-head {
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
 }
 
-/* Grille 3×2 */
-.artisans-grid-6 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.2rem;
+/* ── Filmstrip ── */
+.artisans-filmstrip {
+  display: flex;
+  gap: 3px;
+  align-items: stretch;
+  height: clamp(320px, 42vw, 580px);
+  overflow: hidden;
 }
-
-/* Carte photo */
 .artisan-card {
+  flex: 2;
   position: relative;
   overflow: hidden;
 }
+.artisan-card--wide {
+  flex: 2.8;
+}
 .artisan-img-wrap {
   position: relative;
-  aspect-ratio: 2 / 3;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 .artisan-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.7s cubic-bezier(.25, .46, .45, .94),
+  object-position: center top;
+  filter: grayscale(100%) contrast(1.1) brightness(0.95);
+  transition: transform 0.9s cubic-bezier(.25,.46,.45,.94),
               filter   0.6s ease;
 }
-
-/* Tisseuses : couleur naturelle légèrement assombrie */
-.artisan-card:not(.artisan-card--bw) .artisan-img {
-  filter: brightness(0.9) saturate(1.1);
-}
-
-/* N&B pour couturier / potiers */
-.artisan-img--bw {
-  filter: grayscale(100%) contrast(1.08);
-}
 .artisan-card:hover .artisan-img {
-  transform: scale(1.04);
-}
-.artisan-card:hover .artisan-img--bw {
-  filter: grayscale(55%) contrast(1.05);
+  transform: scale(1.06);
+  filter: grayscale(70%) contrast(1.08) brightness(1);
 }
 .artisan-shade {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(6, 4, 2, .65) 0%, transparent 55%);
+  position: absolute; inset: 0;
+  background: linear-gradient(to top,
+    rgba(6,4,2,.72) 0%,
+    rgba(6,4,2,.08) 45%,
+    transparent 70%);
   pointer-events: none;
+  transition: opacity 0.5s;
+}
+.artisan-card:hover .artisan-shade {
+  opacity: 0.6;
 }
 .artisan-label {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1rem 1.2rem 0.85rem;
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: .8rem 1rem .7rem;
+  transform: translateY(4px);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.artisan-card:hover .artisan-label {
+  transform: translateY(0);
+  opacity: 1;
 }
 .artisan-craft {
   display: inline-block;
   font-family: var(--f-sans);
-  font-size: .72rem;
-  letter-spacing: .18em;
+  font-size: .68rem;
+  letter-spacing: .2em;
   text-transform: uppercase;
   color: var(--c-terracotta);
   border-bottom: 1px solid var(--c-terracotta);
-  padding-bottom: 0.15em;
+  padding-bottom: .1em;
 }
 
-/* Carte citation */
-.artisan-card--quote {
+/* ── Citation standalone ── */
+.artisans-quote-wrap {
+  padding: clamp(3rem, 5vw, 4.5rem) 0;
   display: flex;
-  align-items: center;
   justify-content: center;
-  background: var(--c-surface);
-  border: 1px solid var(--c-sand);
-  aspect-ratio: 2 / 3;
 }
-.artisan-quote {
+.artisans-standalone-quote {
   text-align: center;
-  padding: 1.5rem;
+  max-width: 52rem;
+  padding: 2rem 1.5rem;
+  border-top: 1px solid var(--c-sand);
+  border-bottom: 1px solid var(--c-sand);
 }
-.artisan-quote p {
+.artisans-standalone-quote p {
   font-family: var(--f-serif);
-  font-size: clamp(1rem, 1.6vw, 1.25rem);
-  line-height: 1.6;
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  line-height: 1.55;
   color: var(--c-text);
-  margin-bottom: .75rem;
+  margin-bottom: .6rem;
 }
-.artisan-quote cite {
+.artisans-standalone-quote cite {
   font-family: var(--f-sans);
-  font-size: .72rem;
-  letter-spacing: .14em;
+  font-size: .68rem;
+  letter-spacing: .18em;
   text-transform: uppercase;
   color: var(--c-terracotta);
   font-style: normal;
 }
 
 /* Responsive */
-@media (max-width: 900px) {
-  .artisans-grid-6 {
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+@media (max-width: 860px) {
+  .artisans-filmstrip {
+    height: clamp(220px, 55vw, 380px);
+    gap: 2px;
   }
+  .artisan-label { opacity: 1; transform: none; }
 }
 @media (max-width: 540px) {
-  .artisans-grid-6 {
-    grid-template-columns: 1fr 1fr;
-    gap: .7rem;
+  .artisans-filmstrip {
+    flex-wrap: wrap;
+    height: auto;
+    gap: 2px;
   }
-  .artisan-quote p {
-    font-size: .9rem;
-  }
+  .artisan-card { flex: 0 0 calc(50% - 1px); height: 44vw; }
+  .artisan-card--wide { flex: 0 0 100%; height: 52vw; }
 }
-
 
