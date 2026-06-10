@@ -84,7 +84,12 @@ document.querySelectorAll(
    ────────────────────────────────────── */
 var heroVideo = document.querySelector('.hero-video');
 if (heroVideo) {
-  var onVideoReady = function() { heroVideo.classList.add('is-loaded'); };
+  var onVideoReady = function() {
+    // Ne marquer la vidéo comme chargée que si elle est visible (pas sur mobile)
+    if (window.getComputedStyle(heroVideo).display !== 'none') {
+      heroVideo.classList.add('is-loaded');
+    }
+  };
   if (heroVideo.readyState >= 3) {
     onVideoReady();
   } else {
@@ -142,4 +147,17 @@ document.querySelectorAll('.nav-link').forEach(function(link) {
   if (link.getAttribute('href') === currentPage) {
     link.classList.add('is-active');
   }
+});
+
+
+/* ──────────────────────────────────────
+   Fallback : forcer is-loaded après chargement complet
+   (sécurité mobile si l'événement load a été manqué)
+   ────────────────────────────────────── */
+window.addEventListener('load', function() {
+  document.querySelectorAll('.hero-img, .ucard-img, .story-photo, .boutique-img, .pcard-photo').forEach(function(img) {
+    if (!img.classList.contains('is-loaded') && img.naturalWidth > 0) {
+      img.classList.add('is-loaded');
+    }
+  });
 });
