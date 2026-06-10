@@ -1343,6 +1343,9 @@ button {
     font-size: clamp(2.4rem, 10vw, 3.5rem);
   }
 
+  /* Vidéo cachée sur mobile — ne masque jamais la photo hero */
+  .hero-video.is-loaded ~ .hero-img { opacity: 1 !important; }
+
   .hero-cta {
     flex-direction: column;
     align-items: flex-start;
